@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Budget Builders — Excellence Meets Affordability</title>
+<meta name="description" content="Design-led construction, extensions, loft conversions and renovations across Hillingdon and West London. Premium finishes, honest fixed pricing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#000000;
+    --panel:#16130E;
+    --panel-2:#0e0c08;
+    --gold:#c9a24b;
+    --gold-soft:#d8bd82;
+    --gold-deep:#b8862f;
+    --ivory:#f4efe6;
+    --stone:#9a938a;
+    --stone-dim:#6f6a62;
+    --line:rgba(201,162,75,.28);
+    --line-faint:rgba(201,162,75,.14);
+    --gold-grad:linear-gradient(135deg,#e8d9a6 0%,#c9a24b 45%,#b8862f 100%);
+    --space:clamp(5rem,10vw,9rem);
+    --wrap:1240px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black);
+    color:var(--ivory);
+    font-family:'Jost',system-ui,sans-serif;
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold);color:#000}
+
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:.005em}
+
+  .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(1.4rem,5vw,3.5rem)}
+
+  .eyebrow{
+    font-size:.72rem;font-weight:500;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--gold);display:inline-flex;align-items:center;gap:.9rem;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold-grad)}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.6rem;
+    font-family:'Jost',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;padding:1.05rem 2rem;cursor:pointer;border:none;
+    transition:background .35s ease,color .35s ease,transform .35s ease,box-shadow .35s ease;
+  }
+  .btn-gold{background:var(--gold-grad);color:#120d02;box-shadow:0 0 0 rgba(201,162,75,0)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 34px -14px rgba(201,162,75,.65)}
+  .btn-ghost{background:transparent;color:var(--ivory);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* ---------- door-frame mark ---------- */
+  .mark{width:38px;height:38px;flex:0 0 auto}
+  .mark rect,.mark path,.mark line{stroke:url(#g)}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    display:flex;align-items:center;
+    padding:1.35rem 0;transition:background .4s ease,padding .4s ease,border-color .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{background:rgba(4,4,4,.88);backdrop-filter:blur(14px);padding:.85rem 0;border-color:var(--line-faint)}
+  .nav{display:flex;align-items:center;justify-content:space-between;width:100%}
+  .brand{display:flex;align-items:center;gap:.85rem}
+  .brand-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:.12em;font-weight:600;text-transform:uppercase}
+  .nav-links{display:flex;align-items:center;gap:2.4rem}
+  .nav-links a{
+    font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);
+    position:relative;padding:.3rem 0;transition:color .3s ease;
+  }
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold-grad);transition:width .35s ease}
+  .nav-links a:hover{color:var(--ivory)}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{border:1px solid var(--line);padding:.7rem 1.4rem !important;color:var(--gold) !important}
+  .nav-cta::after{display:none}
+  .nav-cta:hover{background:var(--gold);color:#000 !important}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem}
+  .burger span{width:26px;height:1.5px;background:var(--ivory);transition:.3s}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;isolation:isolate}
+  .hero-bg{position:absolute;inset:0;z-index:-2;background:#000}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55}
+  .hero-bg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.7) 42%,rgba(0,0,0,.35) 100%),
+               linear-gradient(0deg,#000 2%,transparent 40%);}
+  /* the doorway frame device */
+  .hero-frame{position:absolute;inset:clamp(1.4rem,4vw,3rem);z-index:-1;border:1px solid var(--line-faint);pointer-events:none}
+  .hero-frame::before,.hero-frame::after{content:"";position:absolute;width:16px;height:16px}
+  .hero-frame::before{top:-1px;left:-1px;border-top:1px solid var(--gold);border-left:1px solid var(--gold)}
+  .hero-frame::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold)}
+
+  .hero-inner{max-width:760px}
+  .hero h1{font-size:clamp(3.2rem,8.5vw,6.6rem);margin:1.8rem 0 1.4rem}
+  .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:500}
+  .hero-sub{font-size:1.12rem;color:var(--stone);max-width:48ch;margin-bottom:2.6rem;font-weight:300}
+  .hero-tag{
+    font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);
+    display:block;margin-bottom:.4rem;
+  }
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+    font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--stone-dim);
+    display:flex;flex-direction:column;align-items:center;gap:.7rem;z-index:1}
+  .scroll-cue span{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- positioning ---------- */
+  .thesis{padding:var(--space) 0;border-bottom:1px solid var(--line-faint)}
+  .thesis-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2.5rem,6vw,6rem);align-items:end}
+  .thesis h2{font-size:clamp(2.1rem,4vw,3.3rem);margin:1.5rem 0 0;max-width:16ch}
+  .thesis h2 em{font-style:italic;color:var(--gold-soft)}
+  .thesis p{color:var(--stone);font-size:1.05rem;margin-top:1.6rem}
+  .stats{display:grid;gap:2.2rem}
+  .stat{border-left:1px solid var(--line);padding-left:1.4rem}
+  .stat b{font-family:'Cormorant Garamond',serif;font-size:2.9rem;font-weight:600;color:var(--gold);display:block;line-height:1}
+  .stat small{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stone);display:block;margin-top:.5rem}
+
+  /* ---------- services ---------- */
+  .services{padding:var(--space) 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3.5rem}
+  .sec-head h2{font-size:clamp(2.2rem,4.5vw,3.6rem);max-width:14ch}
+  .sec-head p{color:var(--stone);max-width:34ch;font-size:1rem}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-faint)}
+  .svc{
+    padding:2.6rem 2rem 2.8rem;border-bottom:1px solid var(--line-faint);border-right:1px solid var(--line-faint);
+    position:relative;transition:background .4s ease;
+  }
+  .svc:nth-child(3n){border-right:none}
+  .svc::after{content:"";position:absolute;left:0;top:-1px;width:0;height:2px;background:var(--gold-grad);transition:width .45s ease}
+  .svc:hover{background:linear-gradient(180deg,rgba(201,162,75,.05),transparent)}
+  .svc:hover::after{width:100%}
+  .svc .idx{font-size:.72rem;letter-spacing:.2em;color:var(--gold);opacity:.7}
+  .svc h3{font-size:1.7rem;margin:1.1rem 0 .8rem}
+  .svc p{color:var(--stone);font-size:.95rem}
+
+  /* ---------- portfolio ---------- */
+  .work{padding:var(--space) 0;background:linear-gradient(180deg,#000,#080604 60%,#000)}
+  .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:3.4rem}
+  .tile{position:relative;overflow:hidden;background:var(--panel)}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1);filter:saturate(.9) brightness(.82)}
+  .tile:hover img{transform:scale(1.06);filter:saturate(1) brightness(1)}
+  .tile figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:1.4rem;
+    background:linear-gradient(0deg,rgba(0,0,0,.82),transparent);
+    display:flex;justify-content:space-between;align-items:flex-end;
+    opacity:0;transform:translateY(10px);transition:.45s ease;
+  }
+  .tile:hover figcaption{opacity:1;transform:translateY(0)}
+  .tile figcaption b{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600}
+  .tile figcaption span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .tile::before{content:"";position:absolute;inset:.6rem;border:1px solid rgba(201,162,75,0);z-index:2;transition:border-color .5s ease;pointer-events:none}
+  .tile:hover::before{border-color:var(--line)}
+  .g-a{grid-column:span 4;grid-row:span 2}
+  .g-b{grid-column:span 2}
+  .g-c{grid-column:span 2}
+  .g-d{grid-column:span 2}
+  .g-e{grid-column:span 2}
+  .g-f{grid-column:span 2}
+
+  /* before / after */
+  .ba-block{margin-top:5rem;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+  .ba-text h3{font-size:clamp(2rem,3.5vw,2.9rem);margin:1.2rem 0 1rem}
+  .ba-text p{color:var(--stone)}
+  .ba-text ul{list-style:none;margin-top:1.6rem;display:grid;gap:.8rem}
+  .ba-text li{display:flex;gap:.8rem;align-items:baseline;font-size:.95rem;color:var(--ivory)}
+  .ba-text li::before{content:"";width:6px;height:6px;flex:0 0 auto;background:var(--gold);transform:translateY(-1px)}
+  .ba{position:relative;overflow:hidden;user-select:none;aspect-ratio:4/3;border:1px solid var(--line-faint)}
+  .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ba .after{clip-path:inset(0 0 0 var(--split,50%))}
+  .ba .lbl{position:absolute;top:1rem;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:.35rem .7rem;background:rgba(0,0,0,.6);color:var(--gold);z-index:3}
+  .ba .lbl.l{left:1rem}
+  .ba .lbl.r{right:1rem}
+  .ba .handle{position:absolute;top:0;bottom:0;left:var(--split,50%);width:2px;background:var(--gold-grad);z-index:4;transform:translateX(-1px)}
+  .ba .grip{position:absolute;top:50%;left:var(--split,50%);transform:translate(-50%,-50%);width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:5;cursor:ew-resize;display:grid;place-items:center;color:var(--gold);font-size:.9rem}
+  .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:6;margin:0}
+
+  /* ---------- process ---------- */
+  .process{padding:var(--space) 0;border-top:1px solid var(--line-faint)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3.4rem}
+  .step{padding:2.2rem 1.6rem;border-top:1px solid var(--line);position:relative}
+  .step .no{font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:transparent;-webkit-text-stroke:1px var(--gold-deep);line-height:1;display:block;margin-bottom:1.2rem}
+  .step h3{font-size:1.4rem;margin-bottom:.7rem}
+  .step p{color:var(--stone);font-size:.9rem}
+
+  /* ---------- why ---------- */
+  .why{padding:var(--space) 0;position:relative;isolation:isolate}
+  .why-bg{position:absolute;inset:0;z-index:-1}
+  .why-bg img{width:100%;height:100%;object-fit:cover;opacity:.16}
+  .why-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000 30%,rgba(0,0,0,.5))}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
+  .why h2{font-size:clamp(2.2rem,4.5vw,3.6rem);max-width:12ch}
+  .why h2 em{font-style:italic;color:var(--gold-soft)}
+  .why-list{display:grid;gap:1.6rem}
+  .why-item{display:flex;gap:1.2rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line-faint)}
+  .why-item:last-child{border-bottom:none}
+  .why-item .ico{width:40px;height:40px;flex:0 0 auto;border:1px solid var(--line);display:grid;place-items:center;color:var(--gold)}
+  .why-item h4{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:.25rem}
+  .why-item p{color:var(--stone);font-size:.92rem}
+
+  /* ---------- testimonials ---------- */
+  .quotes{padding:var(--space) 0;text-align:center}
+  .quotes .q-mark{font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--gold-deep);line-height:.4;opacity:.5}
+  .quote{max-width:52ch;margin:1.5rem auto 0}
+  .quote p{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);font-style:italic;font-weight:400;line-height:1.35}
+  .quote cite{display:block;margin-top:1.8rem;font-style:normal;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .quote cite small{display:block;color:var(--stone-dim);letter-spacing:.1em;margin-top:.35rem}
+  .dots{display:flex;gap:.6rem;justify-content:center;margin-top:2.6rem}
+  .dots button{width:8px;height:8px;border:1px solid var(--gold-deep);background:transparent;padding:0;cursor:pointer;border-radius:50%;transition:.3s}
+  .dots button.on{background:var(--gold)}
+
+  /* ---------- contact ---------- */
+  .contact{padding:var(--space) 0 0;border-top:1px solid var(--line-faint)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5rem)}
+  .contact h2{font-size:clamp(2.4rem,5vw,4rem);margin:1.4rem 0 1.4rem}
+  .contact h2 em{font-style:italic;color:var(--gold-soft)}
+  .contact-lead{color:var(--stone);max-width:38ch;margin-bottom:2.6rem}
+  .cinfo{display:grid;gap:1.5rem}
+  .cinfo a,.cinfo div{display:flex;gap:1rem;align-items:center}
+  .cinfo .k{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stone-dim);width:78px;flex:0 0 auto}
+  .cinfo .v{font-size:1.05rem;color:var(--ivory);transition:color .3s}
+  .cinfo a:hover .v{color:var(--gold)}
+  .form{display:grid;gap:1.2rem;padding:2.4rem;border:1px solid var(--line-faint);background:linear-gradient(180deg,rgba(201,162,75,.04),transparent)}
+  .field label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:.55rem}
+  .field input,.field textarea,.field select{
+    width:100%;background:#0a0805;border:1px solid var(--line-faint);color:var(--ivory);
+    padding:.9rem 1rem;font-family:'Jost',sans-serif;font-size:.95rem;font-weight:300;transition:border-color .3s}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold)}
+  .field textarea{resize:vertical;min-height:110px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+  .form .btn{width:100%;justify-content:center;margin-top:.4rem}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:var(--space);border-top:1px solid var(--line-faint);padding:4rem 0 2.4rem}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--line-faint)}
+  .foot-brand .brand{margin-bottom:1.2rem}
+  .foot-brand p{color:var(--stone);max-width:34ch;font-size:.95rem}
+  .foot-col h5{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem}
+  .foot-col a,.foot-col span{display:block;color:var(--stone);font-size:.92rem;margin-bottom:.7rem;transition:color .3s}
+  .foot-col a:hover{color:var(--ivory)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-top:2rem;font-size:.75rem;letter-spacing:.08em;color:var(--stone-dim)}
+
+  .reveal{opacity:0;transform:translateY(26px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:960px){
+    .thesis-grid,.why-grid,.contact-grid,.ba-block{grid-template-columns:1fr}
+    .svc-grid{grid-template-columns:1fr 1fr}
+    .svc:nth-child(3n){border-right:1px solid var(--line-faint)}
+    .svc:nth-child(2n){border-right:none}
+    .steps{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .g-a,.g-b,.g-c,.g-d,.g-e,.g-f{grid-column:span 1;grid-row:auto}
+    .g-a{grid-column:span 2}
+  }
+  @media(max-width:640px){
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:min(80vw,320px);background:#050403;
+      flex-direction:column;justify-content:center;align-items:flex-start;gap:1.8rem;
+      padding:2.5rem;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);
+      border-left:1px solid var(--line);z-index:60;
+    }
+    .nav-links.open{transform:translateX(0)}
+    .nav-links a{font-size:1rem}
+    .burger{display:flex;z-index:61}
+    .burger.x span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .burger.x span:nth-child(2){opacity:0}
+    .burger.x span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .svc-grid{grid-template-columns:1fr}
+    .svc,.svc:nth-child(2n){border-right:none}
+    .steps,.foot-grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .two{grid-template-columns:1fr}
+    .sec-head{margin-bottom:2.4rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important}
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG gold gradient def for the door mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8d9a6"/>
+      <stop offset="0.5" stop-color="#c9a24b"/>
+      <stop offset="1" stop-color="#b8862f"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- door mark template (reused via <use>) -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="door" viewBox="0 0 48 48">
+    <rect x="4" y="4" width="40" height="40" rx="3" fill="none" stroke-width="2.2"/>
+    <path d="M14 10 L34 14 V38 L14 40 Z" fill="none" stroke-width="2.2" stroke-linejoin="round"/>
+    <circle cx="18.5" cy="24" r="1.7" fill="url(#g)" stroke="none"/>
+  </symbol>
+</svg>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="The Budget Builders home">
+      <svg class="mark" viewBox="0 0 48 48"><use href="#door"/></svg>
+      <span class="brand-name">The Budget Builders</span>
+    </a>
+    <nav class="nav-links" id="menu">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#process">Process</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+      <a href="https://wa.me/447379595699?text=Hi%20The%20Budget%20Builders%2C%20I%27d%20like%20a%20quote." class="btn nav-cta">Get a Quote</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop" alt="Modern architect-designed home at dusk">
+  </div>
+  <div class="hero-frame" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Property Developers · Hillingdon &amp; West London</span>
+    <h1>Homes built to a<br><em>higher standard.</em></h1>
+    <p class="hero-sub"><span class="hero-tag">Excellence meets affordability</span>
+      Design-led construction, extensions and renovations — premium craftsmanship, delivered on a budget that makes sense.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-gold">View our work</a>
+      <a href="https://wa.me/447379595699?text=Hi%20The%20Budget%20Builders%2C%20I%27d%20like%20to%20discuss%20a%20project." class="btn btn-ghost">Message us on WhatsApp</a>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span></span>Scroll</div>
+</section>
+
+<!-- THESIS -->
+<section class="thesis">
+  <div class="wrap thesis-grid reveal">
+    <div>
+      <span class="eyebrow">Who we are</span>
+      <h2>A great build shouldn't cost the earth — it should <em>last a lifetime.</em></h2>
+      <p>We're a Hillingdon-based team of directly employed craftsmen, project managers and designers. We take on extensions, conversions, refurbishments and new builds across West London, pairing genuinely premium finishes with fixed, transparent pricing — so you know exactly what you're paying for, and why.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>12+</b><small>Years building</small></div>
+      <div class="stat"><b>200+</b><small>Projects completed</small></div>
+      <div class="stat"><b>5.0</b><small>Average client rating</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">What we do</span>
+        <h2>From first drawing to final key.</h2>
+      </div>
+      <p>One accountable team for the whole build — no juggling separate trades, no surprise costs at the end.</p>
+    </div>
+    <div class="svc-grid reveal">
+      <div class="svc">
+        <span class="idx">01</span>
+        <h3>House extensions</h3>
+        <p>Single &amp; double-storey, side-return and wrap-around extensions that add space, light and real value to your home.</p>
+      </div>
+      <div class="svc">
+        <span class="idx">02</span>
+        <h3>Loft conversions</h3>
+        <p>Dormer, hip-to-gable and mansard conversions — turning unused roof space into bedrooms, offices and en-suites.</p>
+      </div>
+      <div class="svc">
+        <span class="idx">03</span>
+        <h3>Renovations &amp; refurbishment</h3>
+        <p>Full-house transformations, structural works and period restorations, managed end to end from one point of contact.</p>
+      </div>
+      <div class="svc">
+        <span class="idx">04</span>
+        <h3>Kitchens &amp; bathrooms</h3>
+        <p>Bespoke kitchens and spa-quality bathrooms, fitted by our own tradesmen to a showroom standard.</p>
+      </div>
+      <div class="svc">
+        <span class="idx">05</span>
+        <h3>New builds &amp; development</h3>
+        <p>Ground-up residential builds and small developments, delivered to programme and to a specification you'll be proud of.</p>
+      </div>
+      <div class="svc">
+        <span class="idx">06</span>
+        <h3>Design, drawings &amp; planning</h3>
+        <p>Architectural drawings, structural calcs and planning submissions handled in-house, so the whole project moves as one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">Recent work</span>
+        <h2>Craftsmanship you can walk through.</h2>
+      </div>
+      <p>A selection of homes we've extended, converted and rebuilt across the boroughs of West London.</p>
+    </div>
+
+    <div class="gallery reveal">
+      <figure class="tile g-a">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop" alt="Open-plan living room renovation">
+        <figcaption><b>The Ruislip Renovation</b><span>Full refurbishment</span></figcaption>
+      </figure>
+      <figure class="tile g-b">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=1200&auto=format&fit=crop" alt="Bespoke fitted kitchen">
+        <figcaption><b>Uxbridge Kitchen</b><span>Kitchen &amp; extension</span></figcaption>
+      </figure>
+      <figure class="tile g-c">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1200&auto=format&fit=crop" alt="Modern bedroom loft conversion">
+        <figcaption><b>Eastcote Loft</b><span>Loft conversion</span></figcaption>
+      </figure>
+      <figure class="tile g-d">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop" alt="Detached new build home exterior">
+        <figcaption><b>Ickenham House</b><span>New build</span></figcaption>
+      </figure>
+      <figure class="tile g-e">
+        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop" alt="Luxury bathroom">
+        <figcaption><b>Hayes Bathroom</b><span>Bathroom fit-out</span></figcaption>
+      </figure>
+      <figure class="tile g-f">
+        <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1?q=80&w=1200&auto=format&fit=crop" alt="Contemporary rear extension with glazing">
+        <figcaption><b>Northwood Extension</b><span>Rear extension</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- before / after -->
+    <div class="ba-block reveal">
+      <div class="ba-text">
+        <span class="eyebrow">Case study</span>
+        <h3>The Harefield transformation.</h3>
+        <p>A tired 1930s semi reworked into a light-filled family home. Drag the slider to see the difference our team made in fourteen weeks.</p>
+        <ul>
+          <li>Rear kitchen-diner extension with roof lantern</li>
+          <li>Full rewire, replaster and re-plumb</li>
+          <li>Completed on a fixed quote, no overruns</li>
+        </ul>
+      </div>
+      <div class="ba" id="ba">
+        <img class="before" src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1400&auto=format&fit=crop" alt="Home before renovation">
+        <img class="after" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1400&auto=format&fit=crop" alt="Home after renovation">
+        <span class="lbl l">Before</span>
+        <span class="lbl r">After</span>
+        <span class="handle"></span>
+        <span class="grip">↔</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Reveal before and after">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">How it works</span>
+        <h2>Four steps, no surprises.</h2>
+      </div>
+      <p>A clear, managed route from your first idea to a home you'll love — with one team accountable throughout.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <span class="no">01</span>
+        <h3>Consultation</h3>
+        <p>We visit, listen to what you want to achieve and talk honestly about budget and what's possible.</p>
+      </div>
+      <div class="step">
+        <span class="no">02</span>
+        <h3>Design &amp; fixed quote</h3>
+        <p>Drawings, specification and a fixed, itemised price — so there are no grey areas before we begin.</p>
+      </div>
+      <div class="step">
+        <span class="no">03</span>
+        <h3>Build</h3>
+        <p>Our directly employed team gets to work, with a dedicated project manager keeping you updated at every stage.</p>
+      </div>
+      <div class="step">
+        <span class="no">04</span>
+        <h3>Handover &amp; aftercare</h3>
+        <p>A snag-free handover, all certificates in order, and a workmanship guarantee that stands behind the build.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="why-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop" alt="">
+  </div>
+  <div class="wrap why-grid reveal">
+    <div>
+      <span class="eyebrow">Why choose us</span>
+      <h2>Premium results, without the <em>premium invoice.</em></h2>
+    </div>
+    <div class="why-list">
+      <div class="why-item">
+        <span class="ico" aria-hidden="true">£</span>
+        <div><h4>Fixed, transparent pricing</h4><p>An itemised quote agreed up front. What we quote is what you pay — no vague estimates, no creeping extras.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="ico" aria-hidden="true">⚒</span>
+        <div><h4>Our own craftsmen</h4><p>Directly employed trades, not a rotating cast of subcontractors — so quality and accountability stay consistent.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="ico" aria-hidden="true">✓</span>
+        <div><h4>Insured &amp; guaranteed</h4><p>Fully insured, building-regs compliant, and every project backed by a written workmanship guarantee.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="ico" aria-hidden="true">◎</span>
+        <div><h4>Local to Hillingdon</h4><p>We're your neighbours. We know the area, the planning quirks and the housing stock across West London.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="quotes">
+  <div class="wrap reveal">
+    <div class="q-mark" aria-hidden="true">"</div>
+    <blockquote class="quote" id="quote">
+      <p>They turned our cramped kitchen into the heart of the house — and stuck to the price they quoted, to the pound. Genuinely the smoothest build we've been through.</p>
+      <cite>Sarah &amp; James<small>Rear extension, Ruislip</small></cite>
+    </blockquote>
+    <div class="dots" id="dots" role="tablist" aria-label="Testimonials">
+      <button class="on" aria-label="Testimonial 1"></button>
+      <button aria-label="Testimonial 2"></button>
+      <button aria-label="Testimonial 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid reveal">
+    <div>
+      <span class="eyebrow">Let's talk</span>
+      <h2>Start your <em>project.</em></h2>
+      <p class="contact-lead">Tell us what you're planning and we'll arrange a free, no-obligation site visit and quote. Most enquiries get a reply the same day.</p>
+      <div class="cinfo">
+        <a href="tel:+447379595699"><span class="k">Call</span><span class="v">+44 7379 595699</span></a>
+        <a href="https://wa.me/447379595699?text=Hi%20The%20Budget%20Builders%2C%20I%27d%20like%20a%20quote."><span class="k">WhatsApp</span><span class="v">Message us directly</span></a>
+        <a href="mailto:hello@thebudgetbuilders.co.uk"><span class="k">Email</span><span class="v">hello@thebudgetbuilders.co.uk</span></a>
+        <div><span class="k">Area</span><span class="v">Hillingdon &amp; West London</span></div>
+      </div>
+    </div>
+
+    <div class="form">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" type="text" placeholder="Jane Smith">
+      </div>
+      <div class="two">
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" type="tel" placeholder="07…">
+        </div>
+        <div class="field">
+          <label for="type">Project type</label>
+          <select id="type">
+            <option>Extension</option>
+            <option>Loft conversion</option>
+            <option>Full renovation</option>
+            <option>Kitchen / bathroom</option>
+            <option>New build</option>
+            <option>Something else</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="msg">A few details</label>
+        <textarea id="msg" placeholder="Tell us about your project, rough budget and timeframe…"></textarea>
+      </div>
+      <button class="btn btn-gold" id="send">Send via WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 48 48"><use href="#door"/></svg>
+          <span class="brand-name">The Budget Builders</span>
+        </div>
+        <p>Excellence meets affordability. Design-led construction and renovation across Hillingdon and West London.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="#services">Extensions</a>
+        <a href="#services">Loft conversions</a>
+        <a href="#services">Renovations</a>
+        <a href="#services">New builds</a>
+      </div>
+      <div class="foot-col">
+        <h5>Get in touch</h5>
+        <a href="tel:+447379595699">+44 7379 595699</a>
+        <a href="https://wa.me/447379595699">WhatsApp</a>
+        <a href="mailto:hello@thebudgetbuilders.co.uk">Email us</a>
+        <span>Hillingdon, London</span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> The Budget Builders. All rights reserved.</span>
+      <span>Fully insured · Building Regs compliant · Workmanship guaranteed</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const hdr = document.getElementById('hdr');
+  addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+  // mobile menu
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.classList.toggle('x', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); burger.classList.remove('x'); burger.setAttribute('aria-expanded', false);
+  }));
+
+  // reveal on scroll
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+  }, {threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // before / after slider
+  const ba = document.getElementById('ba');
+  if (ba){
+    const range = ba.querySelector('input');
+    const set = v => ba.style.setProperty('--split', v + '%');
+    range.addEventListener('input', e => set(e.target.value));
+    set(50);
+  }
+
+  // testimonials
+  const data = [
+    {q:"They turned our cramped kitchen into the heart of the house — and stuck to the price they quoted, to the pound. Genuinely the smoothest build we've been through.", n:"Sarah &amp; James", p:"Rear extension, Ruislip"},
+    {q:"We had quotes from six builders. The Budget Builders weren't the cheapest on paper, but they were the only ones who fixed the price and hit it. Immaculate finish.", n:"Priya K.", p:"Loft conversion, Eastcote"},
+    {q:"Old house, endless surprises behind the walls — and they handled every one without drama or extra invoices. We'll be using them again for the garden room.", n:"The Doyle family", p:"Full renovation, Uxbridge"}
+  ];
+  const qEl = document.getElementById('quote');
+  const dots = [...document.getElementById('dots').children];
+  let i = 0, timer;
+  function show(n){
+    i = n;
+    const d = data[n];
+    qEl.style.opacity = 0;
+    setTimeout(() => {
+      qEl.innerHTML = '<p>'+d.q+'</p><cite>'+d.n+'<small>'+d.p+'</small></cite>';
+      qEl.style.transition = 'opacity .5s'; qEl.style.opacity = 1;
+    }, 220);
+    dots.forEach((b,x) => b.classList.toggle('on', x===n));
+  }
+  dots.forEach((b,x) => b.addEventListener('click', () => { show(x); restart(); }));
+  function next(){ show((i+1)%data.length); }
+  function restart(){ clearInterval(timer); timer = setInterval(next, 6000); }
+  restart();
+
+  // form -> WhatsApp
+  document.getElementById('send').addEventListener('click', () => {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const type = document.getElementById('type').value;
+    const msg = document.getElementById('msg').value.trim();
+    let text = "Hi The Budget Builders, I'd like a quote.";
+    if(name) text += "%0AName: " + encodeURIComponent(name);
+    if(phone) text += "%0APhone: " + encodeURIComponent(phone);
+    text += "%0AProject: " + encodeURIComponent(type);
+    if(msg) text += "%0ADetails: " + encodeURIComponent(msg);
+    window.open("https://wa.me/447379595699?text=" + text, "_blank");
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
