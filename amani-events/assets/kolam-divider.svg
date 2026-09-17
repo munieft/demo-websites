@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 44" fill="none" role="img" aria-label="Kolam ornament">
+  <g stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.9">
+    <!-- centre lotus/eye -->
+    <circle cx="210" cy="22" r="5.5"/>
+    <path d="M210 8 C216 14 216 30 210 36 C204 30 204 14 210 8Z"/>
+    <path d="M196 22 C202 16 218 16 224 22 C218 28 202 28 196 22Z"/>
+    <!-- symmetric kolam loops right -->
+    <path d="M224 22 C238 22 240 10 252 10 C264 10 266 22 254 22 C266 22 264 34 252 34 C240 34 238 22 224 22"/>
+    <path d="M266 22 C280 22 282 10 294 10 C306 10 308 22 296 22 C308 22 306 34 294 34 C282 34 280 22 266 22"/>
+    <path d="M308 22 C322 22 324 12 336 12 C346 12 348 22 338 22 C348 22 346 32 336 32 C324 32 322 22 308 22"/>
+    <path d="M350 22 L372 22"/>
+    <circle cx="378" cy="22" r="2.4" fill="currentColor" stroke="none"/>
+    <!-- symmetric kolam loops left (mirror) -->
+    <path d="M196 22 C182 22 180 10 168 10 C156 10 154 22 166 22 C154 22 156 34 168 34 C180 34 182 22 196 22"/>
+    <path d="M154 22 C140 22 138 10 126 10 C114 10 112 22 124 22 C112 22 114 34 126 34 C138 34 140 22 154 22"/>
+    <path d="M112 22 C98 22 96 12 84 12 C74 12 72 22 82 22 C72 22 74 32 84 32 C96 32 98 22 112 22"/>
+    <path d="M70 22 L48 22"/>
+    <circle cx="42" cy="22" r="2.4" fill="currentColor" stroke="none"/>
+  </g>
+</svg>
