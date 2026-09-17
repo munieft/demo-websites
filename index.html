@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Website Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #08090d;
+            --card: rgba(255, 255, 255, 0.045);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #f5f5f7;
+            --muted: #999ba5;
+            --accent: #8b5cf6;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(139, 92, 246, 0.15),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(59, 130, 246, 0.12),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+        /* Background glow */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139, 92, 246, 0.08);
+            filter: blur(100px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Main */
+
+        .container {
+            width: min(1200px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 90px 0 70px;
+        }
+
+        /* Header */
+
+        header {
+            text-align: center;
+            margin-bottom: 65px;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+            margin-bottom: 22px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: rgba(255, 255, 255, 0.035);
+
+            color: #bdbfc8;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #5ee69a;
+            box-shadow: 0 0 12px #5ee69a;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            line-height: 0.98;
+            letter-spacing: -4px;
+            font-weight: 750;
+
+            background: linear-gradient(
+                120deg,
+                #ffffff 15%,
+                #b9a5ff 55%,
+                #7dd3fc 100%
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            margin-bottom: 24px;
+        }
+
+        .subtitle {
+            max-width: 650px;
+            margin: auto;
+
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* Counter */
+
+        .counter {
+            margin-top: 25px;
+            color: #777984;
+            font-size: 13px;
+        }
+
+        /* Grid */
+
+        #portfolio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        /* Card */
+
+        .card {
+            position: relative;
+            min-height: 240px;
+
+            padding: 28px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.07),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+
+            animation: cardIn 0.6s ease both;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+
+            top: -100px;
+            right: -80px;
+
+            background: var(--accent);
+            opacity: 0.12;
+
+            filter: blur(50px);
+            border-radius: 50%;
+
+            transition: opacity 0.35s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.45);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.35),
+                0 0 40px rgba(139, 92, 246, 0.08);
+        }
+
+        .card:hover::before {
+            opacity: 0.25;
+        }
+
+        .card-number {
+            position: relative;
+
+            color: #686a74;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .card-content {
+            position: relative;
+            margin-top: 35px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 650;
+            letter-spacing: -0.7px;
+            margin-bottom: 10px;
+        }
+
+        .card-folder {
+            color: #7e808a;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        .view-button {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 28px;
+            padding: 12px 15px;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+
+            background: rgba(255, 255, 255, 0.045);
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .view-button span {
+            font-size: 18px;
+            transition: transform 0.25s ease;
+        }
+
+        .view-button:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.35);
+        }
+
+        .view-button:hover span {
+            transform: translateX(4px);
+        }
+
+        /* Empty / error */
+
+        .message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+
+        /* Footer */
+
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            color: #5f616b;
+            font-size: 12px;
+        }
+
+        /* Animations */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tablet */
+
+        @media (max-width: 900px) {
+            #portfolio {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+            .container {
+                width: min(100% - 28px, 1200px);
+                padding-top: 60px;
+            }
+
+            header {
+                margin-bottom: 45px;
+            }
+
+            h1 {
+                font-size: 48px;
+                letter-spacing: -2.5px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            #portfolio {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                min-height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header>
+            <div class="eyebrow">
+                <span></span>
+                Website Portfolio
+            </div>
+
+            <h1>Selected Work</h1>
+
+            <p class="subtitle">
+                A collection of websites and digital experiences
+                designed and developed for different businesses.
+            </p>
+
+            <div class="counter" id="counter">
+                Loading projects...
+            </div>
+        </header>
+
+        <section id="portfolio"></section>
+
+        <footer>
+            Website Portfolio
+        </footer>
+
+    </main>
+
+
+    <script>
+        async function loadWebsites() {
+
+            const portfolio = document.getElementById("portfolio");
+            const counter = document.getElementById("counter");
+
+            try {
+
+                const response = await fetch("websites.json", {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Could not load websites.json");
+                }
+
+                const websites = await response.json();
+
+                counter.textContent =
+                    `${websites.length} ${websites.length === 1 ? "project" : "projects"}`;
+
+                if (websites.length === 0) {
+
+                    portfolio.innerHTML = `
+                        <div class="message">
+                            No websites found.
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                websites.forEach((site, index) => {
+
+                    const card = document.createElement("article");
+
+                    card.className = "card";
+
+                    card.style.animationDelay =
+                        `${Math.min(index * 0.08, 0.6)}s`;
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="card-number">
+                                ${String(index + 1).padStart(2, "0")}
+                            </div>
+
+                            <div class="card-content">
+                                <div class="card-title">
+                                    ${escapeHTML(site.name)}
+                                </div>
+
+                                <div class="card-folder">
+                                    /${escapeHTML(site.folder)}/
+                                </div>
+                            </div>
+                        </div>
+
+                        <a
+                            class="view-button"
+                            href="${encodeURI(site.url)}"
+                        >
+                            View Website
+                            <span>→</span>
+                        </a>
+                    `;
+
+                    portfolio.appendChild(card);
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                counter.textContent = "";
+
+                portfolio.innerHTML = `
+                    <div class="message">
+                        Unable to load the portfolio.
+                    </div>
+                `;
+            }
+        }
+
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        loadWebsites();
+    </script>
+
+</body>
+</html>
