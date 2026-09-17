@@ -2,9 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = __dirname;
-const OUTPUT = path.join(ROOT, "websites.json");
 
-// Files/folders that should never be treated as websites
 const IGNORE = new Set([
     ".git",
     ".github",
@@ -14,38 +12,46 @@ const IGNORE = new Set([
     "websites.json"
 ]);
 
-const entries = fs.readdirSync(ROOT, { withFileTypes: true });
-
-const websites = entries
+const websites = fs.readdirSync(ROOT, { withFileTypes: true })
     .filter(entry => entry.isDirectory())
     .filter(entry => !IGNORE.has(entry.name))
     .filter(entry => {
-        const indexPath = path.join(ROOT, entry.name, "index.html");
-        return fs.existsSync(indexPath);
+        return fs.existsSync(
+            path.join(ROOT, entry.name, "index.html")
+        );
     })
-    .map(entry => {
-        const folder = entry.name;
+    .map(entry => ({
+        name: entry.name
+            .replace(/[-_]+/g, " ")
+            .replace(/\b\w/g, char => char.toUpperCase()),
 
-        return {
-            name: folder
-                .replace(/[-_]+/g, " ")
-                .replace(/\b\w/g, char => char.toUpperCase()),
+        folder: entry.name,
 
-            folder: folder,
-
-            url: `/${folder}/`
-        };
-    })
+        url: `/${entry.name}/`
+    }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
+const output = path.join(ROOT, "websites.json");
+
 fs.writeFileSync(
-    OUTPUT,
-    JSON.stringify(websites, null, 2),
-    "utf8"
+    output,
+    JSON.stringify(websites, null, 2)
 );
 
+console.log("");
+console.log("=================================");
+console.log(" Website Portfolio Build");
+console.log("=================================");
+console.log("");
 console.log(`Found ${websites.length} websites.`);
+console.log("");
 
-websites.forEach(site => {
-    console.log(`  ✓ ${site.name} -> ${site.url}`);
+websites.forEach((site, index) => {
+    console.log(
+        `${index + 1}. ${site.name} -> ${site.url}`
+    );
 });
+
+console.log("");
+console.log(`Generated: ${output}`);
+console.log("");
