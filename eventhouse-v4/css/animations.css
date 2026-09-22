@@ -1,0 +1,142 @@
+/* Scroll reveal & micro-animations */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+/* Hero text entrance */
+.hero-content .section-label,
+.hero-content h1,
+.hero-content p,
+.hero-content .hero-buttons {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-content .section-label { animation-delay: 0.2s; }
+.hero-content h1 { animation-delay: 0.4s; }
+.hero-content p { animation-delay: 0.6s; }
+.hero-content .hero-buttons { animation-delay: 0.8s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Soft pulse for WhatsApp */
+@keyframes softPulse {
+  0%, 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45); }
+  50% { box-shadow: 0 6px 28px rgba(37, 211, 102, 0.7); }
+}
+
+.whatsapp-float {
+  animation: softPulse 2.5s ease-in-out infinite;
+}
+
+/* Gold underline grow */
+.underline-gold {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-gold::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--gold);
+  transition: width 0.6s ease;
+}
+
+.underline-gold.visible::after,
+.underline-gold:hover::after {
+  width: 100%;
+}
+
+/* Card lift */
+.lift {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Image ken burns subtle */
+.kenburns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1) translate(0, 0); }
+  to { transform: scale(1.1) translate(-2%, -1%); }
+}
+
+/* Loading shimmer for images */
+.img-shimmer {
+  background: linear-gradient(90deg, #efe6d8 25%, #f8f1e9 50%, #efe6d8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

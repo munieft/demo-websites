@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Eventhouse">
+  <rect width="64" height="64" rx="15" fill="#0E0F14"/>
+  <g fill="none" stroke="#CBA35A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 52 V30 a17 17 0 0 1 34 0 V52"/>
+    <path d="M32 52 V22"/>
+    <path d="M32 10 l4 5 -4 5 -4 -5 z" fill="#CBA35A" stroke-width="1.2"/>
+    <path d="M11 52 H53" stroke-width="2.2"/>
+  </g>
+</svg>

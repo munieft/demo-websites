@@ -1,0 +1,139 @@
+/* =========================================================
+   Eventhouse Marquee Co. — base.css
+   Tokens · reset · typography · buttons  (Dark luxe theme)
+   ========================================================= */
+:root{
+  /* Surfaces */
+  --ink:#0E0F14;
+  --ink-2:#14161E;
+  --panel:#181B24;
+  --panel-2:#20232F;
+  --cream:#F4EEE2;      /* light section bg */
+  --cream-2:#EAE1CF;
+
+  /* Metals / accents */
+  --gold:#CBA35A;
+  --gold-bright:#E8CB8A;
+  --gold-soft:#EFDCB4;
+  --blush:#E3A38C;
+  --rose:#CE7A5F;
+
+  /* Text */
+  --tx:#ECEAF0;         /* on dark */
+  --tx-soft:#AEB0BC;
+  --tx-faint:#7B7E8C;
+  --ink-tx:#171821;     /* on cream */
+  --ink-tx-soft:#4C4E5A;
+
+  /* Lines */
+  --line:rgba(232,203,138,.16);
+  --line-soft:rgba(255,255,255,.09);
+  --line-ink:rgba(23,24,33,.12);
+
+  /* Type */
+  --serif:"Playfair Display", Georgia, serif;
+  --sans:"Manrope", "Helvetica Neue", Arial, sans-serif;
+
+  /* Accent gradient */
+  --grad:linear-gradient(120deg,var(--gold-bright),var(--blush));
+
+  /* Radius / shadow */
+  --r:14px; --r-lg:26px; --r-pill:999px;
+  --sh:0 24px 60px rgba(0,0,0,.45);
+  --sh-gold:0 18px 44px rgba(203,163,90,.28);
+
+  --maxw:1220px;
+  --gutter:clamp(20px,5vw,70px);
+  --hh:80px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-o:cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--ink);
+  color:var(--tx);
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* film grain + subtle glow over everything */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img,svg,video{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+input,textarea,select{font-family:inherit;font-size:1rem;color:inherit}
+
+/* Typography */
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.06;letter-spacing:-.01em;color:var(--tx)}
+h1{font-size:clamp(2.9rem,7vw,6rem);font-weight:700}
+h2{font-size:clamp(2.1rem,4.6vw,3.7rem)}
+h3{font-size:clamp(1.35rem,2.2vw,1.9rem)}
+p{color:var(--tx-soft)}
+em{font-style:italic}
+.on-cream{color:var(--ink-tx)}
+.on-cream p,.on-cream .lede{color:var(--ink-tx-soft)}
+.on-cream h1,.on-cream h2,.on-cream h3,.on-cream h4{color:var(--ink-tx)}
+
+.display-i{font-style:italic;font-weight:500}
+.grad-tx{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+.eyebrow{
+  font-family:var(--sans);font-weight:600;font-size:.74rem;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+  display:inline-flex;align-items:center;gap:.8em;
+}
+.eyebrow::before{content:"";width:30px;height:1px;background:currentColor;opacity:.8}
+.eyebrow.c::after{content:"";width:30px;height:1px;background:currentColor;opacity:.8}
+.eyebrow.ink{color:var(--rose)}
+
+.lede{font-size:clamp(1.05rem,1.5vw,1.3rem);color:var(--tx-soft);font-weight:300;line-height:1.7}
+.num-huge{font-family:var(--serif);font-weight:700;font-size:clamp(3rem,9vw,7rem);line-height:.9}
+
+/* Layout */
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);position:relative;z-index:2}
+.section{padding-block:clamp(70px,10vw,140px);position:relative}
+.tight{padding-block:clamp(48px,6vw,84px)}
+.center{text-align:center}
+.mx{margin-inline:auto}
+.mw-60{max-width:60ch}.mw-46{max-width:46ch}
+.bg-ink{background:var(--ink)}
+.bg-panel{background:var(--panel)}
+.bg-cream{background:var(--cream);color:var(--ink-tx)}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.65em;
+  font-family:var(--sans);font-weight:600;font-size:.9rem;letter-spacing:.02em;
+  padding:1em 1.8em;border-radius:var(--r-pill);position:relative;overflow:hidden;
+  color:var(--ink);background:var(--gold);
+  transition:transform .4s var(--ease-o),box-shadow .4s var(--ease),background .4s;
+  box-shadow:var(--sh-gold);
+}
+.btn>*{position:relative;z-index:1}
+.btn::after{content:"";position:absolute;inset:0;background:var(--gold-bright);opacity:0;transition:opacity .4s}
+.btn:hover{transform:translateY(-3px)}
+.btn:hover::after{opacity:1}
+.btn--line{background:transparent;color:var(--tx);box-shadow:inset 0 0 0 1.4px var(--line)}
+.btn--line::after{background:var(--gold);opacity:0}
+.btn--line:hover{color:var(--ink)}
+.btn--line:hover::after{opacity:1}
+.btn--line-ink{background:transparent;color:var(--ink-tx);box-shadow:inset 0 0 0 1.4px rgba(23,24,33,.25)}
+.btn--line-ink::after{background:var(--ink-tx)}
+.btn--line-ink:hover{color:var(--cream)}
+.btn--wa{background:#25D366;color:#08351b}
+.btn--wa::after{background:#33e277}
+.btn--sm{padding:.68em 1.25em;font-size:.82rem}
+.btn--block{width:100%;justify-content:center}
+
+:focus-visible{outline:2.5px solid var(--gold);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.skip-link{position:absolute;left:16px;top:-60px;z-index:200;background:var(--gold);color:var(--ink);padding:.7em 1.1em;border-radius:8px;transition:top .3s;font-weight:600}
+.skip-link:focus{top:16px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
