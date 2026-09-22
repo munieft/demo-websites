@@ -1,0 +1,13 @@
+{
+  "name": "London Construction Company",
+  "short_name": "London CC",
+  "description": "Bespoke design and build in Hackney, East London.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1C1A17",
+  "theme_color": "#1C1A17",
+  "icons": [
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
