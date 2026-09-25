@@ -1,0 +1,22 @@
+/* ABOUT PAGE */
+.lead{ font-size:1.12rem; color:var(--ink-soft); line-height:1.75; margin-bottom:14px; }
+.about-photo img{ width:100%; aspect-ratio:4/5; object-fit:cover; }
+
+.values-grid{ margin-top:8px; }
+.value-card{ background:var(--paper); border:1px solid var(--line); border-top:3px solid var(--gold); padding:32px; }
+.value-card__mark{ font-size:0.78rem; letter-spacing:0.04em; font-weight:600; color:var(--gold); }
+.value-card h3{ font-size:1.35rem; margin-top:10px; }
+.value-card p{ margin-top:12px; color:var(--ink-soft); line-height:1.7; }
+
+.timeline{ position:relative; padding-left:32px; border-left:1px solid var(--line-gold); }
+.timeline__item{ position:relative; padding-bottom:48px; padding-left:28px; }
+.timeline__item:last-child{ padding-bottom:0; }
+.timeline__dot{ position:absolute; left:-40.5px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--gold); border:3px solid var(--ivory); box-shadow:0 0 0 1px var(--gold); }
+.timeline__year{ font-size:0.8rem; letter-spacing:0.04em; font-weight:600; color:var(--gold); }
+.timeline__content h3{ font-size:1.4rem; margin-top:6px; }
+.timeline__content p{ margin-top:10px; color:var(--ink-soft); line-height:1.7; max-width:560px; }
+
+@media (max-width:640px){
+  .timeline{ padding-left:20px; }
+  .timeline__dot{ left:-28.5px; }
+}

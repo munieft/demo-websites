@@ -1,0 +1,79 @@
+/* CATERING PAGE */
+
+/* ---------- Cuisine tabs ---------- */
+.cuisine-tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:40px;
+}
+.cuisine-tab{
+  padding:12px 22px;
+  border:1px solid var(--line-gold);
+  background:transparent;
+  color:var(--ink-soft);
+  font-weight:600;
+  font-size:0.92rem;
+  transition:background .3s ease, color .3s ease, border-color .3s ease;
+}
+.cuisine-tab.is-active{ background:var(--wine); color:var(--ivory); border-color:var(--wine); }
+.cuisine-tab:hover:not(.is-active){ border-color:var(--gold); color:var(--wine); }
+
+.menu-panel{ display:none; }
+.menu-panel.is-active{ display:block; animation:panelFade .5s ease; }
+@keyframes panelFade{ from{ opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+.menu-panel__intro{ max-width:640px; color:var(--ink-soft); line-height:1.7; margin-bottom:32px; font-size:1.02rem; }
+
+.dish-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+.dish{
+  background:var(--paper);
+  padding:26px 24px;
+}
+.dish h4{ font-family:var(--font-display); font-size:1.15rem; color:var(--wine-deep); font-weight:600; }
+.dish p{ margin-top:8px; font-size:0.9rem; color:var(--ink-soft); line-height:1.55; }
+.dish span{ display:inline-block; margin-top:10px; font-size:0.72rem; letter-spacing:0.04em; font-weight:700; color:var(--gold); }
+
+/* ---------- Service styles ---------- */
+.service-style-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:8px; }
+.style-card{ position:relative; overflow:hidden; aspect-ratio:4/5; }
+.style-card img{ width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease); }
+.style-card:hover img{ transform:scale(1.08); }
+.style-card__veil{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 40%, rgba(34,21,18,0.9) 100%);
+  display:flex; align-items:flex-end; padding:26px;
+}
+.style-card__veil h3{ color:var(--ivory); font-size:1.3rem; }
+
+/* ---------- Buffet build steps ---------- */
+.build-row{ display:flex; flex-wrap:wrap; gap:0; margin-top:8px; counter-reset:build; }
+.build-item{
+  flex:1 1 220px;
+  padding:28px 24px;
+  border-right:1px solid var(--line-gold);
+  position:relative;
+}
+.build-item:last-child{ border-right:none; }
+.build-item::before{
+  counter-increment:build;
+  content:counter(build);
+  font-family:var(--font-display);
+  font-size:1.6rem;
+  color:var(--gold);
+  display:block;
+  margin-bottom:10px;
+}
+.build-item h4{ font-size:1.1rem; color:var(--ivory); }
+.build-item p{ margin-top:8px; font-size:0.88rem; color:rgba(251,246,236,0.65); line-height:1.55; }
+
+@media (max-width:1080px){
+  .dish-grid{ grid-template-columns:1fr 1fr; }
+  .service-style-grid{ grid-template-columns:1fr; }
+  .build-item{ flex:1 1 45%; border-right:none; border-bottom:1px solid var(--line-gold); }
+}
+@media (max-width:640px){
+  .dish-grid{ grid-template-columns:1fr; }
+  .cuisine-tabs{ overflow-x:auto; flex-wrap:nowrap; padding-bottom:8px; }
+  .cuisine-tab{ white-space:nowrap; }
+}
