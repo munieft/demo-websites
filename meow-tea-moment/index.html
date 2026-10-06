@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meow Tea Moment Greenwich</title>
+<meta name="description" content="Meow Tea Moment 喵茶一刻. Bubble tea, egg waffles and paw-shaped cakes at 4 Woolwich Road, Greenwich, London SE10 0JU.">
+<meta name="theme-color" content="#fffaf3">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=Nunito:wght@400;600;700;800;900&family=Rammetto+One&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--page-->
+<a class="skip" href="#menu">Skip to the menu</a>
+
+<div class="notice" id="notice" hidden>
+  <span class="notice__paw" aria-hidden="true"></span>
+  <p id="noticeText"></p>
+</div>
+
+<header class="top" id="top">
+  <a class="brand" href="#home" aria-label="Meow Tea Moment, back to top">
+    <img src="assets/img/logo.jpg" alt="" width="150" height="150">
+    <span class="brand__name">Meow Tea Moment <span lang="zh-Hant">喵茶一刻</span></span>
+  </a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a href="#menu">Menu</a>
+    <a href="#build">Build a drink</a>
+    <a href="#bakes">Bakes</a>
+    <a href="#tea-guide">Tea guide</a>
+    <a href="#shop">The shop</a>
+    <a class="nav__cta" href="#visit">Visit us</a>
+  </nav>
+</header>
+
+<main id="home">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <canvas class="hero__pearls" id="pearls" aria-hidden="true"></canvas>
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="status" id="status"><span class="status__dot"></span><span id="statusText">Bubble tea &amp; dessert in Greenwich</span></p>
+      <h1 class="tiles" id="tiles" aria-label="We are Meow Tea Moment">
+        <span class="tiles__row tiles__row--sm" data-word="WE ARE"></span>
+        <span class="tiles__row" data-word="MEOW TEA"></span>
+        <span class="tiles__row" data-word="MOMENT"></span>
+      </h1>
+      <p class="hero__line">A break. A cup of bubble tea. A piece of egg waffle. And a cat, or cats.</p>
+      <p class="hero__sub">That is what it says on our window on Woolwich Road, and it is still the whole plan. Over sixty drinks shaken to your ice and sugar level, home-made egg waffles, and watercolour cats on every wall.</p>
+      <div class="hero__cta">
+        <a class="btn btn--coral" href="#menu">See the menu</a>
+        <a class="btn btn--line" href="#build">Build your drink</a>
+      </div>
+      <a class="rating" href="https://www.google.com/maps/search/?api=1&amp;query=Meow+Tea+Moment+Greenwich+4+Woolwich+Rd+London+SE10+0JU" target="_blank" rel="noopener">
+        <span class="rating__num"><span id="ratingNum">4.3</span></span>
+        <span class="rating__stars" aria-hidden="true"><i style="--fill:86%"></i></span>
+        <span class="rating__txt">from 297 Google reviews</span>
+      </a>
+    </div>
+
+    <div class="hero__art">
+      <figure class="hero__drink">
+        <img src="assets/img/drink-apple-green.jpg" alt="An iced apple green tea in a Meow Tea Moment cup on the shop's wooden counter" width="1200" height="1600" fetchpriority="high">
+      </figure>
+      <figure class="hero__front">
+        <img src="assets/img/shopfront.jpg" alt="The Meow Tea Moment shopfront on Woolwich Road" width="1400" height="1867">
+        <figcaption>4 Woolwich Rd, SE10</figcaption>
+      </figure>
+      <div class="hero__tag"><span>Apple Green Tea</span><b>£3.8</b></div>
+      <img class="hero__cat" src="assets/img/cat-matcha.png" alt="" width="480" height="560">
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker__track" id="ticker"></div></div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="section menu" id="menu">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="h2">Drink menu</h2>
+      <p class="lede">Every price is for a regular cup. Go large for +50p, have it warm for +50p. This is the same list as the board on our counter, Chinese names included.</p>
+    </header>
+
+    <div class="menu__tools">
+      <div class="chips" id="chips" role="group" aria-label="Filter by series"></div>
+      <label class="search" for="menuSearch">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <input type="search" id="menuSearch" placeholder="Search taro, matcha, 珍珠…" autocomplete="off">
+      </label>
+    </div>
+    <p class="menu__count" id="menuCount" aria-live="polite"></p>
+
+    <div class="board" id="board"></div>
+    <p class="menu__empty" id="menuEmpty" hidden>No drink matches that. Try “taro”, “matcha” or “smoothie”.</p>
+
+    <aside class="allergy">
+      <strong>Food allergies &amp; intolerances</strong>
+      <span>Please speak to our staff about the ingredients in your drink when making your order. Menu and prices can change in store.</span>
+      <button class="link" type="button" data-zoom="assets/img/menu-board.jpg" data-cap="The printed menu on our counter">See the printed menu</button>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ BUILDER ============ -->
+<section class="section build" id="build">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="h2">Build your drink</h2>
+      <p class="lede">Ordering here takes three steps, the same three printed on the menu. Try it before you reach the counter.</p>
+    </header>
+
+    <div class="build__grid">
+      <form class="steps" id="builder" autocomplete="off">
+        <fieldset class="step">
+          <legend><span class="num">1</span> Pick a drink</legend>
+          <label class="field" for="bDrink"><span class="sr">Drink</span>
+            <select id="bDrink"></select>
+          </label>
+          <div class="row">
+            <div class="seg" role="radiogroup" aria-label="Size">
+              <input type="radio" name="size" id="bSizeR" value="regular" checked><label for="bSizeR">Regular</label>
+              <input type="radio" name="size" id="bSizeL" value="large"><label for="bSizeL">Large <small>+50p</small></label>
+            </div>
+            <div class="seg" role="radiogroup" aria-label="Temperature">
+              <input type="radio" name="temp" id="bTempC" value="cold" checked><label for="bTempC">Cold</label>
+              <input type="radio" name="temp" id="bTempW" value="warm"><label for="bTempW">Warm <small>+50p</small></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="step">
+          <legend><span class="num">2</span> Ice &amp; sugar level</legend>
+          <div class="level">
+            <span class="level__name">Ice</span>
+            <div class="seg seg--5" id="bIce" role="radiogroup" aria-label="Ice level"></div>
+          </div>
+          <div class="level">
+            <span class="level__name">Sugar</span>
+            <div class="seg seg--5" id="bSugar" role="radiogroup" aria-label="Sugar level"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="step">
+          <legend><span class="num">3</span> Add-on</legend>
+          <p class="step__hint">Pick as many as you want.</p>
+          <div class="addons" id="bAddons"></div>
+          <div class="level level--dairy">
+            <span class="level__name">Alternative dairy <small>+60p</small></span>
+            <div class="seg" id="bDairy" role="radiogroup" aria-label="Alternative dairy"></div>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="cupcard">
+        <div class="cupcard__stage">
+          <svg class="cup" id="cup" viewBox="0 0 220 300" role="img" aria-label="Preview of your drink">
+            <defs>
+              <clipPath id="cupClip"><path d="M40 62h140l-16 214a12 12 0 0 1-12 11H68a12 12 0 0 1-12-11z"/></clipPath>
+            </defs>
+            <g id="cupSteam" class="cup__steam">
+              <path d="M88 44c-8-10 8-16 0-28" /><path d="M110 40c-8-10 8-16 0-28" /><path d="M132 44c-8-10 8-16 0-28" />
+            </g>
+            <rect id="cupStraw" class="cup__straw" x="118" y="6" width="13" height="240" rx="6" transform="rotate(7 124 150)"/>
+            <path class="cup__body" d="M40 62h140l-16 214a12 12 0 0 1-12 11H68a12 12 0 0 1-12-11z"/>
+            <g clip-path="url(#cupClip)">
+              <rect id="cupLiquid" class="cup__liquid" x="30" y="92" width="160" height="200"/>
+              <rect id="cupSyrup" class="cup__syrup" x="30" y="92" width="160" height="200"/>
+              <rect id="cupFoam" class="cup__foam" x="30" y="78" width="160" height="30"/>
+              <g id="cupToppings"></g>
+              <g id="cupIce"></g>
+              <path class="cup__shine" d="M58 74l10 190" />
+            </g>
+            <path class="cup__outline" d="M40 62h140l-16 214a12 12 0 0 1-12 11H68a12 12 0 0 1-12-11z"/>
+            <rect class="cup__lid" x="30" y="50" width="160" height="16" rx="8"/>
+            <g class="cup__sticker">
+              <circle cx="110" cy="190" r="30"/>
+              <path d="M98 205v-18l-4-14 9 7h14l9-7-4 14v18z" />
+              <rect x="103" y="190" width="14" height="15" rx="2"/>
+            </g>
+          </svg>
+          <img class="cupcard__cat" src="assets/img/cat-boba.png" alt="" width="740" height="390">
+        </div>
+        <div class="cupcard__sum">
+          <p class="cupcard__name" id="bName"></p>
+          <p class="cupcard__zh" id="bZh" lang="zh-Hant"></p>
+          <ul class="cupcard__lines" id="bLines"></ul>
+          <div class="cupcard__total"><span>Your cup</span><b id="bTotal">£0.00</b></div>
+          <button class="btn btn--navy" type="button" id="bCopy">Copy my order</button>
+          <p class="cupcard__say" id="bSay" aria-live="polite">Copy it, then read it out at the counter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BAKES ============ -->
+<section class="section bakes" id="bakes">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="h2">Bakes &amp; bites</h2>
+      <p class="lede">The dessert half of the sign above the door. Home-made, and best eaten warm.</p>
+    </header>
+
+    <div class="bakes__grid">
+      <article class="bake bake--wide">
+        <div class="bake__pics">
+          <button class="bake__img" type="button" data-zoom="assets/img/meowyaki-oreo.jpg" data-cap="Meowyaki with an Oreo centre">
+            <img src="assets/img/meowyaki-oreo.jpg" alt="Paw-shaped Meowyaki cakes, one cut open to show an Oreo filling" loading="lazy" width="1080" height="700">
+          </button>
+          <button class="bake__img bake__img--sm" type="button" data-zoom="assets/img/meowyaki-custard.jpg" data-cap="Fresh from the paw mould">
+            <img src="assets/img/meowyaki-custard.jpg" alt="A warm Meowyaki broken open on Meow Tea Moment paper" loading="lazy" width="1080" height="1080">
+          </button>
+          <button class="bake__img bake__img--sm" type="button" data-zoom="assets/img/meowyaki-strawberry.jpg" data-cap="A pink one, cut in half">
+            <img src="assets/img/meowyaki-strawberry.jpg" alt="A Meowyaki cut in half showing a pink filling" loading="lazy" width="1080" height="1080">
+          </button>
+        </div>
+        <div class="bake__body">
+          <h3>Meowyaki <span lang="zh-Hant">喵掌燒</span></h3>
+          <p>Our take on taiyaki, baked in a cat's paw mould. Golden outside, soft sponge inside, with an Oreo or red bean centre. Other fillings turn up from time to time.</p>
+          <span class="pricetag">Oreo · Red Bean</span>
+        </div>
+      </article>
+
+      <article class="bake">
+        <div class="bake__img bake__img--video">
+          <video src="assets/video/black-sesame.mp4" poster="assets/img/poster-black-sesame.jpg" muted loop playsinline preload="none" data-autoplay aria-label="Black sesame egg waffle, black sesame latte and black sesame matcha latte"></video>
+        </div>
+        <div class="bake__body">
+          <h3>Egg waffle <span lang="zh-Hant">雞蛋仔</span></h3>
+          <p>Hong Kong bubble waffle, crisp shell and chewy middle. Original or matcha, with black sesame as a special.</p>
+          <span class="pricetag">£4.0</span>
+        </div>
+      </article>
+
+      <article class="bake">
+        <button class="bake__img" type="button" data-zoom="assets/img/lunar-new-year-cake.jpg" data-cap="Meow Po Lunar New Year cake, pan-fried">
+          <img src="assets/img/lunar-new-year-cake.jpg" alt="Pan-fried slices of coconut and matcha Lunar New Year cake" loading="lazy" width="1080" height="1080">
+        </button>
+        <div class="bake__body">
+          <h3>Meow Po New Year cake <span lang="zh-Hant">喵婆年糕</span></h3>
+          <p>A 500g Lunar New Year cake in coconut, brown sugar coconut or matcha coconut. Seasonal, so watch Instagram for pre-orders.</p>
+          <span class="pricetag">Lunar New Year only</span>
+        </div>
+      </article>
+
+      <article class="bake bake--text">
+        <div class="bake__body">
+          <h3>Meow Tea Rice &amp; more</h3>
+          <ul class="ricelist">
+            <li><span>Braised Beef Rice</span><span lang="zh-Hant">紅燒牛肉飯</span></li>
+            <li><span>Three-Cup Chicken Rice</span><span lang="zh-Hant">三杯雞飯</span></li>
+            <li><span>Meow Chicken, spicy</span><span></span></li>
+            <li><span>Home-made egg tart</span><span>£1.50</span></li>
+          </ul>
+          <p>Make either rice a set with one regular drink from the menu.</p>
+          <span class="pricetag">Rice set £14</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEA GUIDE ============ -->
+<section class="section guide" id="tea-guide">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="h2">Simple guide to Japanese teas</h2>
+      <p class="lede">Our matcha and hojicha come from Uji. If you are not sure which one is for you, tell us what you are after.</p>
+    </header>
+
+    <div class="picker" id="picker" role="group" aria-label="What are you after?">
+      <button type="button" class="pick" data-pick="matcha">I want energy</button>
+      <button type="button" class="pick" data-pick="hojicha genmaicha">Something gentle</button>
+      <button type="button" class="pick" data-pick="hojicha">Sensitive stomach</button>
+      <button type="button" class="pick" data-pick="hojicha genmaicha">Tea at night</button>
+    </div>
+
+    <div class="teas">
+      <article class="tea tea--matcha" data-tea="matcha">
+        <div class="tea__top"><img src="assets/img/cat-boba.png" alt="" loading="lazy" width="740" height="390"></div>
+        <div class="tea__body">
+          <h3>Matcha <span lang="ja">抹茶</span></h3>
+          <div class="caf" aria-label="High caffeine"><span>Caffeine</span><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          <ul>
+            <li>Bright green powder, strong taste</li>
+            <li>Lots of antioxidants</li>
+            <li>Gives energy, helps you focus</li>
+          </ul>
+          <p class="tea__try">Try it as <button type="button" class="link" data-drink="Uji Matcha">Uji Matcha</button> or <button type="button" class="link" data-drink="Creamy Uji Matcha">Creamy Uji Matcha</button></p>
+        </div>
+      </article>
+
+      <article class="tea tea--hojicha" data-tea="hojicha">
+        <div class="tea__top"><img src="assets/img/cat-waffle.png" alt="" loading="lazy" width="680" height="390"></div>
+        <div class="tea__body">
+          <h3>Hojicha <span lang="ja">焙茶</span></h3>
+          <div class="caf" aria-label="Low caffeine"><span>Caffeine</span><i class="on"></i><i></i><i></i></div>
+          <ul>
+            <li>Roasted tea, brown, nutty taste</li>
+            <li>Low caffeine, will not keep you awake</li>
+            <li>Toasty, easy on the stomach</li>
+          </ul>
+          <p class="tea__try">Try it as <button type="button" class="link" data-drink="Uji Hojicha">Uji Hojicha</button></p>
+        </div>
+      </article>
+
+      <article class="tea tea--genmaicha" data-tea="genmaicha">
+        <div class="tea__top"><img src="assets/img/cat-calico.png" alt="" loading="lazy" width="580" height="400"></div>
+        <div class="tea__body">
+          <h3>Genmaicha <span lang="ja">玄米茶</span></h3>
+          <div class="caf" aria-label="Very low caffeine"><span>Caffeine</span><i class="on half"></i><i></i><i></i></div>
+          <ul>
+            <li>Green tea with roasted rice, light taste</li>
+            <li>Very low caffeine</li>
+            <li>Mild, not bitter, nice after a meal</li>
+          </ul>
+          <p class="tea__try">Ask at the counter if it is on this week.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section class="section shop" id="shop">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="h2">Inside the shop</h2>
+      <p class="lede">High stools, a wall of cat portraits, and a shelf of things you did not plan to buy. Tap any photo to see it properly.</p>
+    </header>
+
+    <div class="mural">
+      <button type="button" class="mural__img" data-zoom="assets/img/mural-wall-of-thanks.jpg" data-cap="The Greenwich picnic mural and the Wall of Thanks">
+        <img src="assets/img/mural-wall-of-thanks.jpg" alt="A watercolour mural of three cats having a bubble tea picnic in Greenwich Park, beside a wall of signed thank-you cards" loading="lazy" width="1600" height="739">
+      </button>
+      <div class="mural__txt">
+        <h3>Three cats, one picnic, Greenwich Park</h3>
+        <p>The mural by the door shows the view from the hill: the Queen's House, the Old Royal Naval College and Canary Wharf behind, with egg tarts and bubble tea on the blanket. Next to it is the Wall of Thanks, signed card by card by people who have stopped in.</p>
+        <p class="names">The cats on our frames have names. Say hello to <b>Creamy</b> <span lang="zh-Hant">忌廉</span> and <b>Cookie</b> <span lang="zh-Hant">曲奇</span>.</p>
+      </div>
+    </div>
+
+    <div class="gallery" id="gallery">
+      <button type="button" class="shot shot--tall" data-zoom="assets/img/cat-photo-wall.jpg" data-cap="The cat photo wall">
+        <img src="assets/img/cat-photo-wall.jpg" alt="Framed cat photographs and watercolour cat portraits above a wooden bar table" loading="lazy" width="1400" height="1867"><span>The cat photo wall</span>
+      </button>
+      <button type="button" class="shot shot--wide" data-zoom="assets/img/interior-shelves.jpg" data-cap="Seats on the left, gift shelves on the right">
+        <img src="assets/img/interior-shelves.jpg" alt="Bar stools along the wall and shelves of cat plushies, cards and keyrings" loading="lazy" width="1600" height="1200"><span>Seats and shelves</span>
+      </button>
+      <button type="button" class="shot" data-zoom="assets/img/cat-birthday-cake.jpg" data-cap="Birthday at home">
+        <img src="assets/img/cat-birthday-cake.jpg" alt="A grey cat in a happy birthday bib sitting behind a small cake" loading="lazy" width="1080" height="1350"><span>Birthday bib on</span>
+      </button>
+      <button type="button" class="shot" data-zoom="assets/img/cat-ornament-fortune.jpg" data-cap="Lunar New Year cat charm">
+        <img src="assets/img/cat-ornament-fortune.jpg" alt="A red and gold Lunar New Year hanging charm with cartoon cats" loading="lazy" width="1080" height="1439"><span>New Year charms</span>
+      </button>
+      <button type="button" class="shot" data-zoom="assets/img/cat-bib-sitting.jpg" data-cap="Dressed for the occasion">
+        <img src="assets/img/cat-bib-sitting.jpg" alt="A grey British shorthair cat wearing a yellow bib" loading="lazy" width="1080" height="1350"><span>The boss</span>
+      </button>
+      <div class="shot shot--video">
+        <video src="assets/video/third-anniversary.mp4" poster="assets/img/poster-third-anniversary.jpg" muted loop playsinline preload="none" data-autoplay aria-label="Third anniversary lanyard held up in front of the shop sign"></video><span>Third anniversary, 2025</span>
+      </div>
+    </div>
+
+    <header class="head head--sub">
+      <h3 class="h3">The gift shelf</h3>
+      <p class="lede">Hand-written price tags and all.</p>
+    </header>
+    <div class="shelf" id="shelf">
+      <article class="gift">
+        <button type="button" class="gift__img" data-zoom="assets/img/greenwich-tote.jpg" data-cap="Meow Tea × Greenwich drawstring bag"><img src="assets/img/greenwich-tote.jpg" alt="A drawstring bag printed with the Greenwich picnic watercolour" loading="lazy" width="1080" height="1350"></button>
+        <h4>Greenwich picnic bag</h4><p>The mural, on canvas.</p><span class="handtag">any drink + £5</span>
+      </article>
+      <article class="gift">
+        <button type="button" class="gift__img" data-zoom="assets/img/secret-box.jpg" data-cap="Meow Tea Secret Box"><img src="assets/img/secret-box.jpg" alt="Brown cardboard boxes with Meow Tea Moment stickers and a hand-written sign" loading="lazy" width="1080" height="810"></button>
+        <h4>Meow Tea Secret Box</h4><p>You find out when you open it.</p><span class="handtag">£10</span>
+      </article>
+      <article class="gift">
+        <button type="button" class="gift__img" data-zoom="assets/img/cat-cup-keyrings.jpg" data-cap="Cat milk cap drink keyrings"><img src="assets/img/cat-cup-keyrings.jpg" alt="Four tiny bubble tea cup keyrings with cat-shaped lids" loading="lazy" width="1080" height="1080"></button>
+        <h4>Cat cup keyrings</h4><p>Bubble tea you cannot spill.</p><span class="handtag">£5</span>
+      </article>
+      <article class="gift">
+        <button type="button" class="gift__img" data-zoom="assets/img/cat-cubes.jpg" data-cap="Square cat blind boxes"><img src="assets/img/cat-cubes.jpg" alt="Translucent cube-shaped cat figures in pastel colours" loading="lazy" width="957" height="872"></button>
+        <h4>Square cat blind boxes</h4><p>Regular, surprise and hidden styles.</p><span class="handtag">ask in store</span>
+      </article>
+      <article class="gift">
+        <button type="button" class="gift__img" data-zoom="assets/img/cat-cubes-glow.jpg" data-cap="The hidden styles glow in the dark"><img src="assets/img/cat-cubes-glow.jpg" alt="Cube cat figures glowing in the dark" loading="lazy" width="931" height="849"></button>
+        <h4>The ones that glow</h4><p>Hidden styles light up at night.</p><span class="handtag">lucky dip</span>
+      </article>
+      <article class="gift">
+        <div class="gift__img gift__img--video"><video src="assets/video/blind-box-cats.mp4" poster="assets/img/poster-blind-box-cats.jpg" muted loop playsinline preload="none" data-autoplay aria-label="New cat blind box figures on the counter"></video></div>
+        <h4>New on the counter</h4><p>Series come and go. So do we, sometimes.</p><span class="handtag">hello ♥</span>
+      </article>
+    </div>
+    <ul class="tags" aria-label="Also on the shelf">
+      <li>Bubble tea fluffy toy <b>£3.5</b></li>
+      <li>Meow Tea × Greenwich postcard <b>£3, two for £5</b></li>
+      <li>Cat card <b>£2.50</b></li>
+      <li>Letter paper, 40 pcs <b>£5</b></li>
+      <li>Meow Tea bag <b>£10</b></li>
+      <li>Plush kitten <b>£8</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="section visit" id="visit">
+  <div class="wrap visit__grid">
+    <div class="visit__info">
+      <h2 class="h2">Come for a moment</h2>
+      <p class="lede">We are on Woolwich Road in East Greenwich, a short walk from Maze Hill station. Sit in, take away, or get it delivered.</p>
+
+      <dl class="facts">
+        <div><dt>Find us</dt><dd>4 Woolwich Rd<br>London SE10 0JU</dd></div>
+        <div><dt>Call</dt><dd><a href="tel:+447561050342" id="phone">+44 7561 050342</a><button type="button" class="copy" id="copyPhone" data-copy="+44 7561 050342">Copy</button></dd></div>
+        <div><dt>Follow</dt><dd><a href="https://instagram.com/meow.tea.moment.greenwich" target="_blank" rel="noopener">@meow.tea.moment.greenwich</a></dd></div>
+        <div><dt>Delivery</dt><dd><a href="https://www.just-eat.co.uk/restaurants-meow-tea-moment-greenwich" target="_blank" rel="noopener">Just Eat</a>, <a href="https://www.ubereats.com/gb/store/meow-tea-moment-bubble-tea/ORrGGVdZVkaQ3_9SzMsPJw" target="_blank" rel="noopener">Uber Eats</a> and Deliveroo</dd></div>
+      </dl>
+
+      <div class="hero__cta">
+        <a class="btn btn--coral" href="https://www.google.com/maps/search/?api=1&amp;query=Meow+Tea+Moment+Greenwich+4+Woolwich+Rd+London+SE10+0JU" target="_blank" rel="noopener">Get directions</a>
+        <a class="btn btn--line" href="https://instagram.com/meow.tea.moment.greenwich" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+
+    <div class="hourscard">
+      <h3>Opening hours</h3>
+      <p class="hourscard__now" id="hoursNow"></p>
+      <table class="hours" id="hours"><tbody></tbody></table>
+      <p class="hourscard__note">Hours shift around holidays and the odd short break. Instagram always has the latest.</p>
+    </div>
+
+    <figure class="visit__photo">
+      <button type="button" data-zoom="assets/img/shopfront.jpg" data-cap="Look for the red cat sign">
+        <img src="assets/img/shopfront.jpg" alt="Meow Tea Moment seen from the pavement, with its red cat sign and fruit tea poster in the window" loading="lazy" width="1400" height="1867">
+      </button>
+      <figcaption>Look for the red cat sign</figcaption>
+    </figure>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="paws" aria-hidden="true" id="paws"></div>
+  <div class="wrap foot__grid">
+    <img class="foot__logo" src="assets/img/logo.jpg" alt="Meow Tea Moment logo" width="150" height="150">
+    <div>
+      <p class="foot__big">Drink meow tea, enjoy your day.</p>
+      <p>Meow Tea Moment <span lang="zh-Hant">喵茶一刻</span> · Bubble Tea &amp; Dessert<br>4 Woolwich Rd, London SE10 0JU · +44 7561 050342</p>
+    </div>
+    <nav class="foot__nav" aria-label="Footer">
+      <a href="#menu">Menu</a><a href="#build">Build a drink</a><a href="#bakes">Bakes</a><a href="#shop">The shop</a><a href="#visit">Visit</a>
+    </nav>
+  </div>
+  <p class="foot__small">© <span id="year">2026</span> Meow Tea Moment Greenwich. Prices shown are from the in-store menu and may change.</p>
+</footer>
+
+<dialog class="zoom" id="zoom" aria-label="Photo viewer">
+  <button class="zoom__close" type="button" id="zoomClose" aria-label="Close photo">×</button>
+  <img id="zoomImg" src="" alt="">
+  <p id="zoomCap"></p>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<!--/page-->
+<script src="js/menu-data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
