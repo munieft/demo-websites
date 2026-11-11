@@ -43,7 +43,7 @@
   /* scroll reveals: tag elements, stagger siblings */
   var groups = [
     ['.sec-head > *', 0], ['.split > *', 0], ['.steps > li', 1], ['.food > li', 1], ['.cake-stage', 0], ['.cake-wrap > div:last-child > *', 1],
-    ['.quote-grid > li', 1], ['.quotes .note', 0], ['.visit-band', 0], ['.days .day', 2], ['.visit-band dl > div', 1],
+    ['.ratings > li', 1], ['.quote-grid > li', 1], ['.quotes .note', 0], ['.visit-band', 0], ['.days .day', 2], ['.visit-band dl > div', 1],
     ['.mitems > li', 1], ['.card', 1], ['.info-list > li', 1], ['.visit-grid .btns', 0], ['.visit-grid > div:last-child', 0],
     ['.find > li', 1], ['.find', 0], ['.map', 0], ['.banner', 0], ['.section > .wrap > .h2', 0], ['.section > .wrap > .btns', 0]
   ];
