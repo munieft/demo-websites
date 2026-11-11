@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 240" role="img" aria-label="Wingz'N'Dat grill mascot">
+  <defs>
+    <linearGradient id="fl" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e2361b"/>
+      <stop offset=".55" stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#ffc93c"/>
+    </linearGradient>
+    <linearGradient id="fl2" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff9a2a"/>
+      <stop offset="1" stop-color="#ffe27a"/>
+    </linearGradient>
+    <linearGradient id="bw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2a22"/>
+      <stop offset="1" stop-color="#140d0a"/>
+    </linearGradient>
+    <radialGradient id="coal" cx=".5" cy=".5" r=".6">
+      <stop offset="0" stop-color="#ffd166"/>
+      <stop offset=".5" stop-color="#ff5a1f"/>
+      <stop offset="1" stop-color="#8a1a0c"/>
+    </radialGradient>
+  </defs>
+  <!-- flames -->
+  <g class="lm-flames">
+    <path class="lm-f1" fill="url(#fl)" d="M44 98c-8-22 2-40 12-52-2 14 4 22 10 24-4-20 8-42 26-54-6 18 0 30 10 38 0-18 10-32 22-40-4 16 2 28 12 36 4-12 12-20 22-24-6 14-2 26 4 34 4-6 10-10 16-12-6 14-4 34-10 50z"/>
+    <path class="lm-f2" fill="url(#fl2)" d="M70 98c-4-14 2-26 10-32 0 10 4 14 8 16 0-14 8-24 18-30-2 12 2 20 8 24 2-8 8-14 14-16-4 10-2 20 4 24 2-4 6-6 10-8-2 10-2 16-6 22z"/>
+  </g>
+  <!-- spatula arm -->
+  <g class="lm-arm">
+    <path d="M178 120c10-6 14-14 16-26" fill="none" stroke="#1d1410" stroke-width="11" stroke-linecap="round"/>
+    <path d="M178 120c10-6 14-14 16-26" fill="none" stroke="#f7ecd9" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="194" cy="92" r="9" fill="#f7ecd9" stroke="#1d1410" stroke-width="3"/>
+    <path d="M196 86 204 40" stroke="#1d1410" stroke-width="5" stroke-linecap="round"/>
+    <rect x="194" y="14" width="22" height="30" rx="4" transform="rotate(10 205 29)" fill="#cfc6bb" stroke="#1d1410" stroke-width="3"/>
+    <path d="M201 22v16M207 23v16M213 24v16" stroke="#1d1410" stroke-width="2" transform="rotate(10 205 29)"/>
+  </g>
+  <!-- thumbs up arm -->
+  <g class="lm-thumb">
+    <path d="M42 128c-12 0-18 8-20 18" fill="none" stroke="#1d1410" stroke-width="11" stroke-linecap="round"/>
+    <path d="M42 128c-12 0-18 8-20 18" fill="none" stroke="#f7ecd9" stroke-width="6" stroke-linecap="round"/>
+    <rect x="16" y="122" width="10" height="24" rx="5" fill="#f7ecd9" stroke="#1d1410" stroke-width="3"/>
+    <rect x="9" y="140" width="26" height="22" rx="7" fill="#f7ecd9" stroke="#1d1410" stroke-width="3"/>
+    <path d="M12 148h20M12 154h20" stroke="#1d1410" stroke-width="2"/>
+  </g>
+  <!-- legs -->
+  <path d="M80 170 62 230M140 170 158 230M110 176v52" stroke="#5c463a" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="110" cy="206" rx="34" ry="5" fill="none" stroke="#5c463a" stroke-width="4"/>
+  <!-- bowl -->
+  <path d="M38 100h144c0 44-32 78-72 78S38 144 38 100z" fill="url(#bw)" stroke="#0b0705" stroke-width="3"/>
+  <ellipse cx="110" cy="100" rx="74" ry="12" fill="#0b0705"/>
+  <ellipse cx="110" cy="99" rx="66" ry="8" fill="url(#coal)" class="lm-coal"/>
+  <!-- kente band -->
+  <path d="M44 116h132" stroke="#f5b51b" stroke-width="5"/>
+  <path d="M44 116h132" stroke="#1f8a4c" stroke-width="5" stroke-dasharray="10 12"/>
+  <path d="M44 116h132" stroke="#e2361b" stroke-width="5" stroke-dasharray="4 18" stroke-dashoffset="-14"/>
+  <!-- face -->
+  <g class="lm-face">
+    <ellipse cx="90" cy="134" rx="9" ry="11" fill="#fff"/>
+    <ellipse cx="130" cy="134" rx="9" ry="11" fill="#fff"/>
+    <circle class="lm-eye" cx="92" cy="136" r="5" fill="#140d0a"/>
+    <circle class="lm-eye" cx="132" cy="136" r="5" fill="#140d0a"/>
+    <path d="M84 152c14 16 38 16 52 0" fill="#fff" stroke="#0b0705" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+</svg>
