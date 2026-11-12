@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<rect width="512" height="512" rx="96" fill="#100e0c"/>
+<svg x="86" y="110" width="340" height="272" viewBox="0 0 120 96" style="color:#e1b450">
+  <defs>
+    <mask id="M13m" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="96">
+      <rect width="120" height="96" fill="#fff"/>
+      <path d="M27 67 C27.5 51 36 39.5 49 33" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+      <path d="M33.5 72 C33 70 33 68.5 33.3 67" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+      <g stroke="#000" stroke-width="1.5" stroke-linecap="round">
+        <path d="M80 30 C86 40 88 56 88 74"/><path d="M85.5 33.5 C91 43 93 58 93 74"/><path d="M91 38 C96 47 98 60 98 74"/><path d="M96 44 C100 52 102.5 62 102.5 74"/>
+      </g>
+      <path d="M58 41 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z" fill="#000" transform="translate(-14 -5) scale(.9)"/>
+    </mask>
+  </defs>
+  <g fill="currentColor">
+    <path mask="url(#M13m)" d="M14 74 C14 44 34 24 60 24 C86 24 106 44 106 74 Z"/>
+    <rect x="56.5" y="18.5" width="7" height="7" rx="1.6"/>
+    <circle cx="60" cy="14.5" r="5.6"/>
+    <rect x="7" y="74.5" width="106" height="6" rx="3"/>
+    <path d="M2 87.5 H118" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M22 93.5 H98" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+  </g></svg>
+</svg>
