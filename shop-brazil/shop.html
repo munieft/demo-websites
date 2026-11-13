@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop · Shop Brazil Mercado</title>
+<meta name="description" content="Browse all 116 Brazilian products at Shop Brazil, Lewisham — meats, linguiças, pão de queijo, açaí, sweets, drinks and pantry staples. Order on WhatsApp for same-day delivery.">
+<meta name="theme-color" content="#0B3D2E">
+<link rel="icon" href="assets/img/emblem.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/fraunces-latin-full-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="shop" data-hero data-title-en="Shop · Shop Brazil Mercado" data-title-pt="Mercado · Shop Brazil">
+<div class="loader"><img src="assets/img/emblem.svg" alt=""></div>
+
+<section class="phero">
+  <div class="bg"><img src="assets/img/pantry.webp" alt=""></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Shop Brazil</a><span>/</span><span data-en>Shop</span><span data-pt>Mercado</span></div>
+    <h1><span data-en>The <span class="script">Mercado</span></span><span data-pt>O <span class="script">Mercado</span></span></h1>
+    <p class="lead"><span data-en>Our full catalogue — 116 products from the butcher's counter to the sweet aisle. Fill your basket, send it on WhatsApp, and we'll deliver the same day.</span><span data-pt>Nosso catálogo completo — 116 produtos, do açougue ao corredor de doces. Encha a cesta, envie pelo WhatsApp e entregamos no mesmo dia.</span></p>
+  </div>
+</section>
+
+<div class="shopbar">
+  <div class="container wrap">
+    <label class="search"><span class="sr-only">Search</span><span data-icon="search"></span><input id="q" type="search" data-ph-en="Search picanha, guaraná, pão de queijo…" data-ph-pt="Busque picanha, guaraná, pão de queijo…" autocomplete="off"></label>
+    <label class="sort"><span class="sr-only">Sort</span><select id="sort">
+      <option value="cat">Aisle / Corredor</option>
+      <option value="az">A → Z</option>
+      <option value="lo">£ ↑</option>
+      <option value="hi">£ ↓</option>
+    </select></label>
+    <div class="chips" id="chips"></div>
+  </div>
+</div>
+
+<section class="sec" style="padding-top:20px">
+  <div class="container">
+    <div class="results-meta"><span id="meta"></span><button class="link-arrow" id="openCart2"><span data-en>View basket</span><span data-pt>Ver cesta</span> →</button></div>
+    <div id="results"></div>
+    <div class="noresults" id="none" hidden>
+      <h3 data-en>Nothing found… yet!</h3><h3 data-pt>Nada encontrado… ainda!</h3>
+      <p class="mt-s"><span data-en>We stock more than what's listed here. Ask us on WhatsApp — if it's Brazilian, we'll try to find it.</span><span data-pt>Temos mais do que está listado aqui. Pergunte no WhatsApp — se é brasileiro, a gente tenta achar.</span></p>
+      <a class="btn wa mt" href="https://wa.me/447535009098" target="_blank" rel="noopener"><span data-en>Ask on WhatsApp</span><span data-pt>Perguntar no WhatsApp</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec tight paper">
+  <div class="container">
+    <div class="cta-band rv">
+      <div>
+        <span class="eyebrow" style="color:var(--ouro)"><span data-en>How ordering works</span><span data-pt>Como funciona</span></span>
+        <h2 class="mt-s"><span data-en>Basket → WhatsApp → <span class="script">your door</span></span><span data-pt>Cesta → WhatsApp → <span class="script">sua porta</span></span></h2>
+        <p class="mt-s" style="opacity:.85;max-width:50ch"><span data-en>Add products, press checkout and your order opens in WhatsApp ready to send. The team confirms the weight of butcher's cuts, the delivery fee and your time slot — then it's on its way.</span><span data-pt>Adicione os produtos, finalize e o pedido abre no WhatsApp pronto para enviar. A equipe confirma o peso das carnes, a taxa de entrega e o horário — e pronto, está a caminho.</span></p>
+      </div>
+      <div class="acts"><a class="btn gold" href="visit.html"><span data-en>Delivery details</span><span data-pt>Sobre o delivery</span></a></div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function(){
+  const T=SB_T, cats=SB_CATS, all=SB_PRODUCTS;
+  const order=Object.keys(cats);
+  const chips=document.getElementById("chips"), res=document.getElementById("results");
+  const q=document.getElementById("q"), sort=document.getElementById("sort"), meta=document.getElementById("meta"), none=document.getElementById("none");
+  let active="all";
+  const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+  chips.innerHTML=`<button class="chip on" data-c="all">${T("Everything","Tudo")} <em>${all.length}</em></button>`+
+    order.map(k=>`<button class="chip" data-c="${k}"><span class="dot" style="background:${cats[k].color}"></span>${T(cats[k].en,cats[k].pt)} <em>${all.filter(p=>p.cat===k).length}</em></button>`).join("");
+  chips.addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;setCat(b.dataset.c,true)});
+  function setCat(c,push){active=c;chips.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x.dataset.c===c));
+    if(push){try{history.replaceState(null,"",c==="all"?location.pathname:"#"+c)}catch(e){}}
+    render();const b=chips.querySelector(".chip.on");b&&b.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});}
+  function render(){
+    const term=norm(q.value.trim());
+    let list=all.filter(p=>(active==="all"||p.cat===active)&&(!term||norm(p.pt+" "+p.en+" "+cats[p.cat].pt+" "+cats[p.cat].en).includes(term)));
+    const s=sort.value;
+    const pr=p=>p.price==null?9999:p.price;
+    if(s==="az")list.sort((a,b)=>a.pt.localeCompare(b.pt,"pt"));
+    if(s==="lo")list.sort((a,b)=>pr(a)-pr(b));
+    if(s==="hi")list.sort((a,b)=>(b.price||0)-(a.price||0));
+    none.hidden=!!list.length;
+    meta.innerHTML=T(`Showing <b>${list.length}</b> of ${all.length} products`,`Mostrando <b>${list.length}</b> de ${all.length} produtos`);
+    if(s==="cat"&&!term){
+      res.innerHTML=order.filter(k=>list.some(p=>p.cat===k)).map(k=>{const items=list.filter(p=>p.cat===k);
+        return `<div class="cat-block" id="blk-${k}"><h3><span class="dot" style="background:${cats[k].color}"></span>${T(cats[k].en,cats[k].pt)} <small>${items.length} ${T("items","itens")}</small></h3><div class="grid">${items.map(SB_card).join("")}</div></div>`}).join("");
+    } else res.innerHTML=`<div class="grid">${list.map(SB_card).join("")}</div>`;
+    res.querySelectorAll(".pcard").forEach((c,i)=>{c.classList.add("pop");c.style.animationDelay=Math.min(i,16)*30+"ms"});
+  }
+  let deb;q.addEventListener("input",()=>{clearTimeout(deb);deb=setTimeout(render,120)});
+  sort.addEventListener("change",render);
+  document.addEventListener("sb:lang",render);
+  document.getElementById("openCart2").onclick=()=>SB_openCart();
+  const h=location.hash.slice(1);setCat(cats[h]?h:"all",false);
+  addEventListener("hashchange",()=>{const k=location.hash.slice(1);if(cats[k])setCat(k,false)});
+})();
+</script>
+</body>
+</html>

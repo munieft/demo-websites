@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Butchery · Shop Brazil Açougue</title>
+<meta name="description" content="Brazilian butcher in Lewisham: picanha, maminha, cupim, contra-filé, costela, short ribs, linguiça and seasoned chicken — cut the Brazilian way.">
+<meta name="theme-color" content="#0B3D2E">
+<link rel="icon" href="assets/img/emblem.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/fraunces-latin-full-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="butchery" data-hero data-title-en="Butchery · Shop Brazil Açougue" data-title-pt="Açougue · Shop Brazil">
+<div class="loader"><img src="assets/img/emblem.svg" alt=""></div>
+
+<section class="phero">
+  <div class="bg"><video data-auto muted loop playsinline autoplay poster="assets/img/poster-hero-steak.webp"><source src="assets/video/hero-steak.mp4" type="video/mp4"></video></div>
+  <div class="embers"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Shop Brazil</a><span>/</span><span data-en>Butchery</span><span data-pt>Açougue</span></div>
+    <h1><span data-en>The <span class="script">Açougue</span></span><span data-pt>O <span class="script">Açougue</span></span></h1>
+    <p class="lead"><span data-en>Brazilian cuts, prepared by people who grew up around the churrasqueira. Whole, sliced, rolled or seasoned — just tell us how you'll cook it.</span><span data-pt>Cortes brasileiros preparados por quem cresceu em volta da churrasqueira. Inteiro, fatiado, enrolado ou temperado — é só dizer como vai preparar.</span></p>
+    <div class="flex mt"><a class="btn gold" href="#cortes"><span data-en>Explore the cuts</span><span data-pt>Ver os cortes</span></a><a class="btn ghost" href="#churrasco" style="color:var(--creme)"><span data-en>Churrasco guide</span><span data-pt>Guia do churrasco</span></a></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container split">
+    <div class="rv l" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
+      <div class="reel" style="aspect-ratio:9/16"><video data-auto muted loop playsinline preload="metadata" poster="assets/img/poster-counter.webp"><source src="assets/video/counter.mp4" type="video/mp4"></video><span data-en>Live at the counter</span><span data-pt>Ao vivo no balcão</span></div>
+      <div style="display:grid;gap:16px">
+        <figure style="border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)"><img src="assets/img/beef-slabs.webp" alt="Beef slabs on the block" loading="lazy" style="aspect-ratio:3/4;object-fit:cover;width:100%"></figure>
+        <figure style="border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)"><img src="assets/img/beef-shank.webp" alt="Beef shank cuts" loading="lazy" style="aspect-ratio:1;object-fit:cover;width:100%"></figure>
+      </div>
+    </div>
+    <div class="rv r">
+      <span class="eyebrow"><span data-en>Produtos de altíssima qualidade</span><span data-pt>Produtos de altíssima qualidade</span></span>
+      <h2 class="mt-s"><span data-en>A butcher that speaks <em class="acc">your language</em></span><span data-pt>Um açougue que fala <em class="acc">a sua língua</em></span></h2>
+      <p class="lead mt-s"><span data-en>Most high-street butchers don't cut picanha with the fat cap on, or know what a cupim is. We do. Our counter is laid out the Brazilian way, with Irish beef for picanha and maminha and pork cut for pernil, costela and barriga.</span><span data-pt>Açougue comum não corta picanha com a capa de gordura nem sabe o que é cupim. A gente sabe. Nosso balcão é montado do jeito brasileiro, com carne irlandesa para picanha e maminha e porco cortado para pernil, costela e barriga.</span></p>
+      <ul class="checks">
+        <li><i>✓</i><span data-en><b>Temperado ou sem tempero</b> — chicken hearts, wings and drumettes, seasoned in-house or plain.</span><span data-pt><b>Temperado ou sem tempero</b> — coração, asa e coxinha da asa temperados na casa ou ao natural.</span></li>
+        <li><i>✓</i><span data-en><b>Linguiças by the kilo</b> — toscana, pork, spicy and chicken, plus calabresa and chouriço.</span><span data-pt><b>Linguiças por quilo</b> — toscana, porco, apimentada e frango, além de calabresa e chouriço.</span></li>
+        <li><i>✓</i><span data-en><b>For the panela too</b> — oxtail for rabada, beef liver, pork ribs and a feijoada kit.</span><span data-pt><b>Para a panela também</b> — rabo de boi para rabada, fígado, costelinha e kit feijoada.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CUTS EXPLORER -->
+<section class="sec on-dark" id="cortes">
+  <div class="embers"></div>
+  <div class="container" style="position:relative">
+    <div class="sec-head split">
+      <div><span class="eyebrow"><span data-en>Cut guide</span><span data-pt>Guia de cortes</span></span>
+      <h2 class="mt-s"><span data-en>Know your <em class="acc">cortes</em></span><span data-pt>Conheça os <em class="acc">cortes</em></span></h2></div>
+      <p class="lead"><span data-en>Select a cut to see what it is, how Brazilians cook it, and add it to your basket.</span><span data-pt>Escolha um corte para ver o que é, como o brasileiro prepara e adicionar à cesta.</span></p>
+    </div>
+    <div class="cuts">
+      <div class="cut-list" id="cutList"></div>
+      <div class="cut-view rv z" id="cutView"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHURRASCO GUIDE -->
+<section class="sec paper" id="churrasco">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow"><span data-en>The ritual</span><span data-pt>O ritual</span></span>
+      <h2><span data-en>Churrasco, <span class="script" style="color:var(--brasa)">the Brazilian way</span></span><span data-pt>Churrasco <span class="script" style="color:var(--brasa)">do jeito certo</span></span></h2>
+      <p class="lead"><span data-en>Four simple rules every Brazilian uncle swears by.</span><span data-pt>Quatro regras que todo tio do churrasco jura de pé junto.</span></p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="ic" data-ci="churrasco"></div><h4 data-en>Light it early</h4><h4 data-pt>Acenda cedo</h4><p data-en>Charcoal needs 30–40 minutes to turn to glowing embers. Cook over brasa, never over flame.</p><p data-pt>O carvão precisa de 30–40 minutos para virar brasa. Asse na brasa, nunca no fogo alto.</p></div>
+      <div class="step rv d1"><div class="ic" data-ci="mercearia"></div><h4 data-en>Sal grosso only</h4><h4 data-pt>Só sal grosso</h4><p data-en>Coarse salt — or our parrilla salt — just before grilling. Good meat needs nothing else.</p><p data-pt>Sal grosso — ou nosso sal de parrilla — logo antes de ir pra grelha. Carne boa não precisa de mais nada.</p></div>
+      <div class="step rv d2"><div class="ic" data-ci="linguicas"></div><h4 data-en>Starters first</h4><h4 data-pt>Entradinha primeiro</h4><p data-en>Linguiça, coração and queijo coalho keep everyone happy while the picanha takes its time.</p><p data-pt>Linguiça, coração e queijo coalho seguram a turma enquanto a picanha capricha.</p></div>
+      <div class="step rv d3"><div class="ic" data-ci="carnes"></div><h4 data-en>Slice against the grain</h4><h4 data-pt>Fatie contra a fibra</h4><p data-en>Rest the meat a few minutes, then slice thin against the grain. Serve with farofa and vinagrete.</p><p data-pt>Descanse a carne alguns minutos e fatie fino contra a fibra. Sirva com farofa e vinagrete.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL MEATS -->
+<section class="sec">
+  <div class="container">
+    <div class="sec-head split">
+      <div><span class="eyebrow"><span data-en>The full counter</span><span data-pt>O balcão completo</span></span>
+      <h2 class="mt-s"><span data-en>Meats, sausages & <em class="acc">grill gear</em></span><span data-pt>Carnes, linguiças & <em class="acc">churrasco</em></span></h2></div>
+      <p class="lead"><span data-en>Prices marked /kg are charged on final weight — we confirm the exact total with you on WhatsApp.</span><span data-pt>Preços marcados /kg são cobrados pelo peso final — confirmamos o total exato com você no WhatsApp.</span></p>
+    </div>
+    <div class="grid" id="meatGrid"></div>
+  </div>
+</section>
+
+<section class="sec tight">
+  <div class="container">
+    <div class="combo rv" style="background:var(--brasa)">
+      <div class="txt">
+        <span class="eyebrow" style="color:var(--ouro)"><span data-en>Need something special?</span><span data-pt>Precisa de algo especial?</span></span>
+        <h2><span data-en>Order a cut <span class="script">your way</span></span><span data-pt>Peça o corte <span class="script">do seu jeito</span></span></h2>
+        <p style="opacity:.9;max-width:48ch"><span data-en>Planning a big churrasco, a family feijoada or a Christmas pernil? Message us with the weight and the cut — we'll prepare it and let you know when it's ready.</span><span data-pt>Vai fazer um churrascão, uma feijoada em família ou um pernil de Natal? Mande o peso e o corte — a gente prepara e avisa quando estiver pronto.</span></p>
+        <div><a class="btn gold" href="https://wa.me/447535009098" target="_blank" rel="noopener"><span data-en>Message the butcher</span><span data-pt>Falar com o açougueiro</span></a></div>
+      </div>
+      <figure><img src="assets/img/pernil-roast.webp" alt="Seasoned pernil wrapped in foil" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function(){
+  const T=SB_T,P=id=>SB_PRODUCTS.find(p=>p.id===id);
+  const cuts=[
+    {id:30,img:"picanha",tags:[["Churrasco","Churrasco"],["Fat cap on","Com capa de gordura"],["Rare–medium","Mal passada–ao ponto"]],
+     en:"The queen of Brazilian barbecue. A triangular rump cap with its fat layer intact — skewered in a C-shape or sliced into thick steaks, then grilled with coarse salt.",
+     pt:"A rainha do churrasco. Corte triangular com a capa de gordura intacta — no espeto em formato de C ou em bifes grossos, só com sal grosso."},
+    {id:23,img:"beef-slabs",tags:[["Grill or oven","Grelha ou forno"],["Juicy","Suculenta"]],
+     en:"Rump tail (tri-tip). Tender and juicy, it shines on the grill whole or roasted in the oven with garlic and herbs.",
+     pt:"Maminha. Macia e suculenta, brilha na grelha inteira ou assada no forno com alho e ervas."},
+    {id:114,img:"ribeye",tags:[["Steaks","Bifes"],["Quick grill","Grelha rápida"]],
+     en:"Sirloin with a ribbon of fat along the edge. The everyday steak of Brazil — bife acebolado, parmegiana or straight on the grill.",
+     pt:"Contra-filé com aquela faixa de gordura na borda. O bife do dia a dia — acebolado, à parmegiana ou direto na grelha."},
+    {id:3,img:"beef-cut",tags:[["Low & slow","Fogo baixo"],["4–8 hours","4–8 horas"]],
+     en:"The hump of the zebu cow — a true Brazilian speciality. Wrap it in foil and cook low and slow until it falls apart.",
+     pt:"O cupim do boi zebu — especialidade brasileira de verdade. Embrulhe no papel-alumínio e asse em fogo baixo até desmanchar."},
+    {id:1,img:"short-ribs",tags:[["Costela","Costela"],["Fogo de chão","Fogo de chão"]],
+     en:"Beef short ribs for costela-style churrasco. Slow over embers or in the pressure cooker with mandioca.",
+     pt:"Short ribs para costela no churrasco. Devagar na brasa ou na panela de pressão com mandioca."},
+    {id:95,img:"rolled-beef",tags:[["Rolê","Rolê"],["Oven","Forno"]],
+     en:"Boneless beef rib — perfect rolled and stuffed (rolê) with bacon, carrots and calabresa, then roasted.",
+     pt:"Costela sem osso — perfeita enrolada e recheada com bacon, cenoura e calabresa e levada ao forno."},
+    {id:51,img:"oxtail-mandioca",tags:[["Rabada","Rabada"],["Pressure cooker","Panela de pressão"]],
+     en:"Oxtail for rabada: braised until sticky and tender, served with polenta or mandioca and watercress.",
+     pt:"Rabo de boi para rabada: cozido até ficar macio e encorpado, com polenta ou mandioca e agrião."},
+    {id:88,img:"stuffed-roasts",tags:[["Christmas","Natal"],["Marinate overnight","Marinar de véspera"]],
+     en:"Pork leg — the centrepiece of a Brazilian Christmas table. Marinate overnight with garlic, lime and herbs.",
+     pt:"Pernil — a estrela da ceia de Natal. Marine de um dia para o outro com alho, limão e ervas."}
+  ];
+  const list=document.getElementById("cutList"),view=document.getElementById("cutView");
+  view.innerHTML=cuts.map((c,i)=>`<img src="assets/img/${c.img}.webp" alt="${P(c.id).pt}" class="${i?"":"on"}" loading="${i?"lazy":"eager"}">`).join("")+`<div class="cinfo" id="cutInfo"></div>`;
+  list.innerHTML=cuts.map((c,i)=>{const p=P(c.id);return `<button class="${i?"":"on"}" data-i="${i}"><span class="n">${String(i+1).padStart(2,"0")}</span><span><b>${p.pt}</b><small>${T(p.en,SB_CATS.carnes.pt)}</small></span><span class="p">£${p.price.toFixed(2)}</span></button>`}).join("");
+  function show(i){const c=cuts[i],p=P(c.id);
+    list.querySelectorAll("button").forEach((b,k)=>b.classList.toggle("on",k===i));
+    view.querySelectorAll("img").forEach((im,k)=>im.classList.toggle("on",k===i));
+    document.getElementById("cutInfo").innerHTML=`<div class="tags">${c.tags.map(t=>`<span>${T(t[0],t[1])}</span>`).join("")}</div>
+      <h3>${p.pt}</h3><p style="opacity:.85;max-width:52ch">${T(c.en,c.pt)}</p>
+      <div class="flex"><span class="price" style="color:var(--ouro)">£${p.price.toFixed(2)}${p.unit?"<small style='color:#fff'>/kg</small>":""}</span><button class="btn gold sm" id="cutAdd">${T("Add to basket","Adicionar à cesta")}</button></div>`;
+    document.getElementById("cutAdd").onclick=e=>SB_add(c.id,"",e.currentTarget);
+  }
+  list.addEventListener("click",e=>{const b=e.target.closest("button");if(b)show(+b.dataset.i)});
+  show(0);
+  const meats=SB_PRODUCTS.filter(p=>["carnes","linguicas","churrasco"].includes(p.cat));
+  document.getElementById("meatGrid").innerHTML=meats.map(SB_card).join("");
+})();
+</script>
+</body>
+</html>
