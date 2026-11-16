@@ -236,3 +236,9 @@
     requestAnimationFrame(frame);
   }
 })();
+(function(){var v=document.getElementById("slvid"),b=document.querySelector(".vid-toggle");if(!v||!b)return;
+function sync(){b.firstElementChild.className=v.paused?"i-play":"i-pause";b.setAttribute("aria-label",v.paused?"Play video":"Pause video")}
+b.addEventListener("click",function(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()});
+v.addEventListener("play",sync);v.addEventListener("pause",sync);
+if("IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting&&!v.paused){v.pause();v.dataset.auto="1"}else if(e.isIntersecting&&v.dataset.auto==="1"){v.dataset.auto="";var p=v.play();if(p&&p.catch)p.catch(function(){})}})},{threshold:.25}).observe(v)}
+})();
