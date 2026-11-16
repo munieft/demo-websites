@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop — Masala Mart Barnet | Indian Groceries Online</title>
+<meta name="description" content="Browse Masala Mart's Indian grocery catalogue — fresh vegetables, spices, atta, rice, dal, namkeen, mithai, frozen and pooja essentials. Click & Collect in Barnet.">
+<meta name="theme-color" content="#0f6b31">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..700&family=Outfit:wght@300..700&family=Yatra+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="shop">
+<div id="site-header"></div>
+<section class="phero"><div class="wrap"><div class="crumb"><a href="index.html">Home</a> / Shop</div><h1 class="h2">The Masala Mart <em style="color:var(--marigold)">aisles</em></h1><p>Fresh, authentic and fairly priced. Add to your basket for Click & Collect or local delivery around Barnet.</p></div></section>
+
+<main class="wrap shop">
+  <aside class="side">
+    <h4>Aisles</h4><div class="cl" id="sideCats"></div>
+    <h4>Filter</h4>
+    <label class="chk"><input type="checkbox" id="fOffer"> On offer</label>
+    <label class="chk"><input type="checkbox" id="fMember"> MM Card prices</label>
+    <label class="chk"><input type="checkbox" id="fStock"> In stock only</label>
+    <label class="chk"><input type="checkbox" id="fPhoto"> Seasonal & fresh picks</label>
+  </aside>
+  <section>
+    <div class="catpills" id="pills"></div>
+    <div id="banner"></div>
+    <div class="toolbar">
+      <h2 id="title">All products<small id="count"></small></h2>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <div class="field"><svg viewBox="0 0 24 24" style="width:16px;color:var(--muted)"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" placeholder="Search products" aria-label="Search products"></div>
+        <div class="field"><select id="sort" aria-label="Sort"><option value="feat">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="az">Name A–Z</option></select></div>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const { Store, $, $$, card, esc } = MM;
+  const st = { cat: 'all', q: '', offer: false, member: false, stock: false, fresh: false, sort: 'feat' };
+  const cats = [{ id: 'all', name: 'All products', icon: '🛒', hue: 130 }, ...Store.categories];
+  const count = id => id === 'all' ? Store.products.length : Store.products.filter(p => p.cat === id).length;
+  function nav() {
+    $('#sideCats').innerHTML = cats.map(c => `<button data-c="${c.id}" class="${st.cat === c.id ? 'on' : ''}"><span>${c.icon}</span>${esc(c.name)}<i>${count(c.id)}</i></button>`).join('');
+    $('#pills').innerHTML = cats.map(c => `<button data-c="${c.id}" class="${st.cat === c.id ? 'on' : ''}">${c.icon} ${esc(c.name)}</button>`).join('');
+  }
+  function render() {
+    let list = Store.products.filter(p =>
+      (st.cat === 'all' || p.cat === st.cat) &&
+      (!st.q || (p.name + ' ' + (p.desc || '') + ' ' + Store.cat(p.cat).name).toLowerCase().includes(st.q.toLowerCase())) &&
+      (!st.offer || p.offer || p.was || p.mm) && (!st.member || p.mm) && (!st.stock || (p.stock ?? 1) > 0) && (!st.fresh || p.featured || /seasonal|fresh|arrived/i.test(p.badge || '')));
+    const s = { low: (a, b) => a.price - b.price, high: (a, b) => b.price - a.price, az: (a, b) => a.name.localeCompare(b.name), feat: (a, b) => (!!b.featured - !!a.featured) || (!!b.img - !!a.img) }[st.sort];
+    list.sort(s);
+    const c = Store.cat(st.cat);
+    $('#title').firstChild.textContent = st.q ? `Results for “${st.q}”` : st.offer ? 'Offers & deals' : st.member ? 'MM Card prices' : st.cat === 'all' ? 'All products' : c.name;
+    $('#count').textContent = `${list.length} items`;
+    $('#banner').innerHTML = st.cat !== 'all' ? `<div class="cat-banner" style="--h:${c.hue}"><div class="cat-ico">${c.icon}</div><div><b style="font-family:var(--f-d);font-size:1.2rem">${esc(c.name)}</b><div class="muted" style="font-size:.9rem">Hand-picked and restocked daily at our Barnet store.</div></div></div>` : '';
+    $('#grid').innerHTML = list.length ? list.map(card).join('') : `<div class="noresults"><div style="font-size:3rem">🔍</div><p>Nothing matches yet — try another search, or WhatsApp us on 07512 345114 and we'll source it for you.</p></div>`;
+    nav();
+  }
+  function fromHash() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    Object.assign(st, { cat: 'all', q: '', offer: false, member: false });
+    if (h.startsWith('c-')) st.cat = h.slice(2); else if (h.startsWith('q-')) st.q = h.slice(2); else if (h === 'offers') st.offer = true; else if (h === 'member') st.member = true;
+    $('#q').value = st.q; $('#fOffer').checked = st.offer; $('#fMember').checked = st.member; render();
+  }
+  document.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (b) { location.hash = b.dataset.c === 'all' ? '' : 'c-' + b.dataset.c; if (b.dataset.c === 'all') fromHash(); scrollTo({ top: $('.shop').offsetTop - 90, behavior: 'smooth' }); } });
+  let t; $('#q').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.q = e.target.value.trim(); render(); }, 180); });
+  $('#sort').onchange = e => { st.sort = e.target.value; render(); };
+  [['fOffer', 'offer'], ['fMember', 'member'], ['fStock', 'stock'], ['fPhoto', 'fresh']].forEach(([id, k]) => $('#' + id).onchange = e => { st[k] = e.target.checked; render(); });
+  addEventListener('hashchange', fromHash);
+  addEventListener('mm:data', render);
+  fromHash();
+});
+</script>
+</body>
+</html>

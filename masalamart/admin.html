@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Store Admin — Masala Mart</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..700&family=Outfit:wght@300..700&family=Yatra+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+body{background:#f6f1e7}
+.login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(800px 500px at 80% 10%,#ffe9bf,transparent),var(--green-d);padding:1rem}
+.login form{background:#fff;border-radius:26px;padding:2.5rem;width:min(400px,100%);text-align:center;box-shadow:var(--sh-l)}
+.login img{width:110px;margin:0 auto 1rem;border-radius:50%}
+.login input{width:100%;text-align:center;font-size:1.6rem;letter-spacing:.6em;border:1.5px solid var(--line);border-radius:14px;padding:.8rem;margin:1rem 0;outline:0}
+.adm{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.aside{background:var(--green-d);color:#d8eedc;padding:1.5rem 1rem;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:.3rem}
+.aside .brand{color:#fff;margin-bottom:1.5rem;padding:0 .5rem}.aside .brand b{color:#fff}.aside .brand small{color:#9fc6a8}
+.aside button,.aside a.tab{display:flex;gap:.7rem;align-items:center;padding:.75rem 1rem;border-radius:12px;text-align:left;transition:.2s;font-weight:500}
+.aside button:hover,.aside a.tab:hover{background:rgba(255,255,255,.08)}
+.aside button.on{background:var(--marigold);color:var(--ink)}
+.aside .sp{flex:1}
+.main{padding:2rem clamp(1rem,3vw,2.5rem)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.top h1{font-family:var(--f-d);color:var(--green-d);font-size:2rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat{background:#fff;border-radius:18px;padding:1.3rem;border:1px solid var(--line)}
+.stat small{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.stat b{display:block;font-family:var(--f-d);font-size:2rem;color:var(--green-d)}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+.tbl th,.tbl td{padding:.75rem .9rem;text-align:left;border-bottom:1px solid #f0e6d2;font-size:.9rem;vertical-align:middle}
+.tbl th{background:var(--cream);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr:hover td{background:#fffcf4}
+.tbl img{width:46px;height:46px;border-radius:10px;object-fit:cover}
+.tbl input.inl{width:80px;border:1px solid var(--line);border-radius:8px;padding:.35rem .5rem}
+.scroll{overflow-x:auto}
+.ab{padding:.45rem .8rem;border-radius:10px;font-size:.82rem;font-weight:600;background:var(--cream-2)}
+.ab:hover{background:var(--green);color:#fff}
+.ab.del:hover{background:var(--red)}
+.pill{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.75rem;font-weight:700;background:#e6f4ea;color:var(--green)}
+.pill.low{background:#fff1d6;color:#a35a00}.pill.out{background:#fde8e8;color:var(--red-d)}
+.drop{border:2px dashed var(--line);border-radius:16px;padding:1rem;text-align:center;cursor:pointer;transition:.2s;display:grid;grid-template-columns:110px 1fr;gap:1rem;align-items:center;text-align:left}
+.drop.over{border-color:var(--saffron);background:#fff8e8}
+.drop img{width:110px;height:110px;border-radius:12px;object-fit:cover;background:var(--cream)}
+.mbody{padding:2rem}
+.mbody h2{font-family:var(--f-d);color:var(--green-d);margin-bottom:1rem}
+.card-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.5rem;margin-bottom:1.2rem}
+.card-box h3{font-family:var(--f-d);color:var(--green-d);margin-bottom:.8rem}
+.hrs{display:grid;grid-template-columns:110px 1fr 1fr 80px;gap:.5rem;align-items:center;margin-bottom:.4rem}
+.hrs input{border:1px solid var(--line);border-radius:8px;padding:.4rem}
+.order{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.2rem;margin-bottom:1rem}
+.order header{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+.order ul{margin:.7rem 0 0 1.1rem;font-size:.9rem}
+.order select{border:1px solid var(--line);border-radius:10px;padding:.4rem .6rem}
+.hint{font-size:.8rem;color:var(--muted)}
+@media(max-width:900px){.adm{grid-template-columns:1fr}.aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap}.aside .brand,.aside .sp{display:none}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="modal" id="pm"><div class="modal-card" style="width:min(760px,100%)"></div></div>
+<div class="toasts"></div>
+<input type="file" id="importFile" accept="application/json" hidden>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const { Store, $, $$, esc, money, img } = MM;
+  let tab = 'dash', pq = '', pc = 'all';
+  const authed = () => { try { return sessionStorage.getItem('mm_admin') === '1'; } catch (e) { return window._mmA; } };
+  const setAuth = () => { try { sessionStorage.setItem('mm_admin', '1'); } catch (e) {} window._mmA = true; };
+  const db = () => Store.load();
+  const save = () => Store.save(db());
+
+  function login() {
+    $('#root').innerHTML = `<div class="login"><form id="lf"><img src="assets/img/logo.jpg" alt=""><h2 style="font-family:var(--f-d);color:var(--green-d)">Store Admin</h2><p class="muted">Enter your admin PIN</p><input type="password" inputmode="numeric" maxlength="8" id="pin" autofocus><div class="err" id="le"></div><button class="btn btn-full">Sign in</button><p class="hint" style="margin-top:1rem">Demo PIN: 1234 — change it in Settings.</p><a class="link" href="index.html" style="display:inline-block;margin-top:.8rem">← Back to store</a></form></div>`;
+    $('#lf').onsubmit = e => { e.preventDefault(); if ($('#pin').value === db().settings.adminPin) { setAuth(); shell(); } else $('#le').textContent = 'Incorrect PIN'; };
+  }
+  function shell() {
+    const T = [['dash', '📊', 'Dashboard'], ['products', '🛒', 'Products'], ['cats', '🗂️', 'Categories'], ['orders', '🧾', 'Orders'], ['settings', '⚙️', 'Settings']];
+    $('#root').innerHTML = `<div class="adm"><nav class="aside"><a href="index.html" class="brand"><img src="assets/img/logo.jpg" alt=""><span><b>Masala Mart</b><small>Admin panel</small></span></a>
+      ${T.map(([k, i, n]) => `<button data-tab="${k}" class="${tab === k ? 'on' : ''}">${i} ${n}</button>`).join('')}<div class="sp"></div><a class="tab" href="shop.html" target="_blank">↗ View shop</a><button id="lo">⎋ Sign out</button></nav><section class="main" id="view"></section></div>`;
+    $$('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; shell(); });
+    $('#lo').onclick = () => { try { sessionStorage.removeItem('mm_admin'); } catch (e) {} window._mmA = false; login(); };
+    ({ dash, products, cats, orders, settings })[tab]();
+  }
+
+  /* ---------- Dashboard ---------- */
+  function dash() {
+    const P = db().products, O = Store.orders(), rev = O.filter(o => o.status !== 'Cancelled').reduce((a, o) => a + o.total, 0);
+    const low = P.filter(p => (p.stock ?? 0) <= 10);
+    $('#view').innerHTML = `<div class="top"><h1>Namaste 🙏</h1><button class="btn" data-new>+ Add product</button></div>
+      <div class="stats"><div class="stat"><small>Products</small><b>${P.length}</b></div><div class="stat"><small>Low / out of stock</small><b>${low.length}</b></div><div class="stat"><small>Orders</small><b>${O.length}</b></div><div class="stat"><small>Order value</small><b>${money(rev)}</b></div></div>
+      <div class="card-box"><h3>Recent orders</h3>${O.length ? orderList(O.slice(0, 5)) : '<p class="muted">No orders yet — orders placed on the checkout page appear here.</p>'}</div>
+      <div class="card-box"><h3>Stock alerts</h3>${low.length ? `<div class="scroll"><table class="tbl"><tr><th></th><th>Product</th><th>Stock</th><th></th></tr>${low.map(p => `<tr><td><img src="${img(p)}" alt=""></td><td>${esc(p.name)}</td><td>${stockPill(p)}</td><td><button class="ab" data-edit="${p.id}">Restock</button></td></tr>`).join('')}</table></div>` : '<p class="muted">All products well stocked.</p>'}</div>`;
+    bindCommon(); bindOrders();
+  }
+  const stockPill = p => { const s = p.stock ?? 0; return `<span class="pill ${s <= 0 ? 'out' : s <= 10 ? 'low' : ''}">${s <= 0 ? 'Out' : s}</span>`; };
+
+  /* ---------- Products ---------- */
+  function products() {
+    const C = db().categories;
+    let list = db().products.filter(p => (pc === 'all' || p.cat === pc) && (!pq || p.name.toLowerCase().includes(pq.toLowerCase())));
+    $('#view').innerHTML = `<div class="top"><h1>Products <small class="muted" style="font-size:1rem;font-family:var(--f-b)">${list.length}</small></h1>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap"><div class="field"><input id="pq" placeholder="Search…" value="${esc(pq)}"></div><div class="field"><select id="pc"><option value="all">All aisles</option>${C.map(c => `<option value="${c.id}" ${pc === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></div><button class="btn" data-new>+ Add product</button></div></div>
+      <div class="scroll"><table class="tbl"><tr><th>Image</th><th>Name</th><th>Aisle</th><th>Price £</th><th>MM £</th><th>Stock</th><th>Live</th><th></th></tr>
+      ${list.map(p => `<tr><td><img src="${img(p)}" alt=""></td><td><b>${esc(p.name)}</b><div class="hint">${esc(p.unit || '')}${p.badge ? ' · ' + esc(p.badge) : ''}${p.offer ? ' · ' + esc(p.offer.label) : ''}</div></td><td>${esc(Store.cat(p.cat).name)}</td>
+      <td><input class="inl" type="number" step="0.01" data-f="price" data-id="${p.id}" value="${p.price}"></td><td><input class="inl" type="number" step="0.01" data-f="mm" data-id="${p.id}" value="${p.mm ?? ''}"></td><td><input class="inl" type="number" data-f="stock" data-id="${p.id}" value="${p.stock ?? 0}"></td>
+      <td><input type="checkbox" data-vis="${p.id}" ${p.hidden ? '' : 'checked'} style="width:18px;height:18px;accent-color:var(--green)"></td>
+      <td style="white-space:nowrap"><button class="ab" data-edit="${p.id}">Edit</button> <button class="ab del" data-del="${p.id}">Delete</button></td></tr>`).join('')}</table></div>
+      <p class="hint" style="margin-top:.8rem">Tip: edit price, MM price and stock inline — changes save instantly and show on the shop.</p>`;
+    $('#pq').oninput = e => { pq = e.target.value; clearTimeout(window._t); window._t = setTimeout(() => { products(); const i = $('#pq'); i.focus(); i.setSelectionRange(99, 99); }, 250); };
+    $('#pc').onchange = e => { pc = e.target.value; products(); };
+    $$('[data-f]').forEach(i => i.onchange = () => { const p = Store.product(i.dataset.id), v = i.value === '' ? undefined : +i.value; if (i.dataset.f === 'mm' && !v) delete p.mm; else p[i.dataset.f] = v; save(); MM.toast('Saved'); });
+    $$('[data-vis]').forEach(i => i.onchange = () => { Store.product(i.dataset.vis).hidden = !i.checked; save(); MM.toast(i.checked ? 'Product live' : 'Product hidden'); });
+    $$('[data-del]').forEach(b => b.onclick = () => confirmBox(`Delete “${Store.product(b.dataset.del).name}”?`, () => { db().products = db().products.filter(p => p.id !== b.dataset.del); save(); products(); MM.toast('Deleted'); }));
+    bindCommon();
+  }
+  function bindCommon() {
+    $$('[data-new]').forEach(b => b.onclick = () => editor());
+    $$('[data-edit]').forEach(b => b.onclick = () => editor(b.dataset.edit));
+  }
+
+  function editor(id) {
+    const p = id ? JSON.parse(JSON.stringify(Store.product(id))) : { id: 'p' + Date.now().toString(36), name: '', cat: db().categories[0].id, price: 0, unit: '', stock: 20 };
+    let image = p.img || '';
+    const m = $('#pm');
+    m.querySelector('.modal-card').innerHTML = `<button class="x" data-mc>×</button><form class="mbody" id="pf"><h2>${id ? 'Edit product' : 'New product'}</h2>
+      <div class="drop" id="drop"><img id="pimg" src="${image || MM.art(p)}" alt=""><div><b>Product image</b><p class="hint">Drag & drop or click to upload (JPG/PNG). Images are resized for fast loading. Leave empty for automatic artwork.</p><button type="button" class="ab" id="rmimg" style="margin-top:.5rem">Remove image</button></div><input type="file" accept="image/*" hidden id="file"></div>
+      <div class="form" style="margin-top:1rem">
+        <label class="full">Product name<input name="name" required value="${esc(p.name)}"></label>
+        <label>Aisle<select name="cat">${db().categories.map(c => `<option value="${c.id}" ${p.cat === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></label>
+        <label>Pack size / unit<input name="unit" value="${esc(p.unit || '')}" placeholder="e.g. 1kg, bunch, each"></label>
+        <label>Price (£)<input name="price" type="number" step="0.01" min="0" required value="${p.price}"></label>
+        <label>Was price (£) <span class="hint">optional</span><input name="was" type="number" step="0.01" min="0" value="${p.was ?? ''}"></label>
+        <label>MM Card price (£) <span class="hint">optional</span><input name="mm" type="number" step="0.01" min="0" value="${p.mm ?? ''}"></label>
+        <label>Stock<input name="stock" type="number" min="0" value="${p.stock ?? 0}"></label>
+        <label>Badge <span class="hint">e.g. Seasonal, Bestseller</span><input name="badge" value="${esc(p.badge || '')}"></label>
+        <label>Multi-buy: quantity <span class="hint">e.g. 2</span><input name="oq" type="number" min="2" value="${p.offer?.qty ?? ''}"></label>
+        <label>Multi-buy: price for that qty (£)<input name="op" type="number" step="0.01" min="0" value="${p.offer?.price ?? ''}"></label>
+        <label>Multi-buy label<input name="ol" value="${esc(p.offer?.label || '')}" placeholder="Buy 1 Get 1 Free"></label>
+        <label class="full">Description<textarea name="desc" rows="3">${esc(p.desc || '')}</textarea></label>
+        <label class="chk"><input type="checkbox" name="featured" ${p.featured ? 'checked' : ''}> Feature on homepage</label>
+        <label class="chk"><input type="checkbox" name="hidden" ${p.hidden ? 'checked' : ''}> Hide from shop</label>
+      </div><div class="err" id="pe"></div>
+      <div style="display:flex;gap:.6rem;margin-top:1.2rem"><button class="btn">Save product</button><button type="button" class="btn ghost" data-mc>Cancel</button></div></form>`;
+    m.classList.add('show');
+    const drop = $('#drop'), file = $('#file');
+    const load = f => { if (!f || !f.type.startsWith('image/')) return; const r = new FileReader(); r.onload = () => { const im = new Image(); im.onload = () => { const s = Math.min(1, 720 / Math.max(im.width, im.height)); const c = document.createElement('canvas'); c.width = im.width * s; c.height = im.height * s; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); image = c.toDataURL('image/jpeg', .82); $('#pimg').src = image; }; im.src = r.result; }; r.readAsDataURL(f); };
+    drop.onclick = e => { if (e.target.id !== 'rmimg') file.click(); };
+    file.onchange = () => load(file.files[0]);
+    drop.ondragover = e => { e.preventDefault(); drop.classList.add('over'); }; drop.ondragleave = () => drop.classList.remove('over');
+    drop.ondrop = e => { e.preventDefault(); drop.classList.remove('over'); load(e.dataTransfer.files[0]); };
+    $('#rmimg').onclick = () => { image = ''; $('#pimg').src = MM.art(p); };
+    $$('[data-mc]', m).forEach(b => b.onclick = () => m.classList.remove('show'));
+    $('#pf').onsubmit = e => {
+      e.preventDefault(); const d = Object.fromEntries(new FormData(e.target));
+      if (!d.name.trim() || !(+d.price >= 0)) { $('#pe').textContent = 'Name and price are required.'; return; }
+      const n = { id: p.id, name: d.name.trim(), cat: d.cat, unit: d.unit.trim(), price: +d.price, stock: +d.stock || 0, desc: d.desc.trim() };
+      if (d.was) n.was = +d.was; if (d.mm) n.mm = +d.mm; if (d.badge.trim()) n.badge = d.badge.trim(); if (image) n.img = image;
+      if (d.oq && d.op) n.offer = { qty: +d.oq, price: +d.op, label: d.ol.trim() || `${d.oq} for £${(+d.op).toFixed(2)}` };
+      if (d.featured) n.featured = true; if (d.hidden) n.hidden = true;
+      const L = db().products, i = L.findIndex(x => x.id === p.id); if (i >= 0) L[i] = n; else L.unshift(n);
+      save(); m.classList.remove('show'); MM.toast('Product saved'); shell();
+    };
+  }
+
+  /* ---------- Categories ---------- */
+  function cats() {
+    const C = db().categories;
+    $('#view').innerHTML = `<div class="top"><h1>Aisles & categories</h1></div>
+      <div class="scroll"><table class="tbl"><tr><th>Icon</th><th>Name</th><th>Colour hue (0–360)</th><th>Products</th><th></th></tr>
+      ${C.map((c, i) => `<tr><td><input class="inl" data-ci="${i}" data-k="icon" value="${esc(c.icon)}" style="width:56px;font-size:1.3rem;text-align:center"></td><td><input class="inl" data-ci="${i}" data-k="name" value="${esc(c.name)}" style="width:220px"></td><td><input class="inl" type="range" min="0" max="360" data-ci="${i}" data-k="hue" value="${c.hue}" style="width:140px;accent-color:hsl(${c.hue},70%,45%)"></td><td>${db().products.filter(p => p.cat === c.id).length}</td><td><button class="ab del" data-cdel="${i}">Delete</button></td></tr>`).join('')}</table></div>
+      <form class="card-box" id="cf" style="margin-top:1.2rem"><h3>Add an aisle</h3><div class="form"><label>Name<input name="name" required placeholder="e.g. Oils & Ghee"></label><label>Icon (emoji)<input name="icon" value="🛒"></label></div><button class="btn" style="margin-top:1rem">Add aisle</button></form>`;
+    $$('[data-ci]').forEach(i => i.onchange = () => { const c = C[i.dataset.ci]; c[i.dataset.k] = i.dataset.k === 'hue' ? +i.value : i.value; save(); MM.toast('Saved'); if (i.dataset.k === 'hue') cats(); });
+    $$('[data-cdel]').forEach(b => b.onclick = () => { const c = C[b.dataset.cdel]; if (db().products.some(p => p.cat === c.id)) return MM.toast('Move or delete its products first', 'warn'); confirmBox(`Delete aisle “${c.name}”?`, () => { C.splice(b.dataset.cdel, 1); save(); cats(); }); });
+    $('#cf').onsubmit = e => { e.preventDefault(); const d = Object.fromEntries(new FormData(e.target)); const id = d.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'cat' + Date.now(); if (C.some(c => c.id === id)) return MM.toast('That aisle exists', 'warn'); C.push({ id, name: d.name, icon: d.icon || '🛒', hue: Math.floor(Math.random() * 360) }); save(); cats(); MM.toast('Aisle added'); };
+  }
+
+  /* ---------- Orders ---------- */
+  const ST = ['New', 'Confirmed', 'Packed', 'Ready / Out for delivery', 'Completed', 'Cancelled'];
+  function orderList(O) {
+    return O.map(o => `<div class="order"><header><div><b>${o.id}</b> · ${new Date(o.at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}<div class="hint">${o.mode === 'collect' ? '🏪 Click & Collect' : '🛵 Delivery'} · ${esc(o.slot)}${o.member ? ' · MM Card' : ''}</div></div>
+      <div style="display:flex;gap:.6rem;align-items:center"><b style="font-size:1.2rem">${money(o.total)}</b><select data-os="${o.id}">${ST.map(s => `<option ${o.status === s ? 'selected' : ''}>${s}</option>`).join('')}</select><a class="ab" target="_blank" rel="noopener" href="https://wa.me/${(o.customer.phone || '').replace(/\D/g, '').replace(/^0/, '44')}?text=${encodeURIComponent(`Hi ${o.customer.name}, your Masala Mart order ${o.id} is now: ${o.status}.`)}">Message</a><button class="ab del" data-od="${o.id}">×</button></div></header>
+      <div class="hint" style="margin-top:.4rem">${esc(o.customer.name)} · ${esc(o.customer.phone)}${o.customer.address ? ' · ' + esc(o.customer.address) + ', ' + esc(o.customer.postcode) : ''}${o.customer.notes ? ' · “' + esc(o.customer.notes) + '”' : ''}</div>
+      <ul>${o.items.map(i => `<li>${i.qty} × ${esc(i.name)} (${esc(i.unit || '')}) — ${money(i.total)}</li>`).join('')}</ul></div>`).join('');
+  }
+  function bindOrders() {
+    $$('[data-os]').forEach(s => s.onchange = () => { const O = Store.orders(); O.find(o => o.id === s.dataset.os).status = s.value; Store.saveOrders(O); MM.toast('Status updated'); shell(); });
+    $$('[data-od]').forEach(b => b.onclick = () => confirmBox('Delete this order?', () => { Store.saveOrders(Store.orders().filter(o => o.id !== b.dataset.od)); shell(); }));
+  }
+  function orders() {
+    const O = Store.orders();
+    $('#view').innerHTML = `<div class="top"><h1>Orders <small class="muted" style="font-size:1rem;font-family:var(--f-b)">${O.length}</small></h1></div>${O.length ? orderList(O) : '<div class="card-box"><p class="muted">No orders yet. Orders placed from the checkout page on this device appear here. Connect a backend to receive orders from every customer.</p></div>'}`;
+    bindOrders();
+  }
+
+  /* ---------- Settings ---------- */
+  function settings() {
+    const S = db().settings, N = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    $('#view').innerHTML = `<div class="top"><h1>Settings</h1></div>
+      <form id="sf"><div class="card-box"><h3>Store details</h3><div class="form">
+        <label class="full">Announcement ticker<textarea name="announcement" rows="2">${esc(S.announcement)}</textarea></label>
+        <label>Display phone<input name="phone" value="${esc(S.phone)}"></label><label>WhatsApp number (intl, digits only)<input name="whatsapp" value="${esc(S.whatsapp)}"></label>
+        <label>Instagram handle<input name="instagram" value="${esc(S.instagram)}"></label><label>Admin PIN<input name="adminPin" value="${esc(S.adminPin)}"></label></div></div>
+      <div class="card-box"><h3>Opening hours</h3>${[1, 2, 3, 4, 5, 6, 0].map(d => `<div class="hrs"><b>${N[d]}</b><input type="time" name="o${d}" value="${S.hours[d]?.[0] || ''}"><input type="time" name="c${d}" value="${S.hours[d]?.[1] || ''}"><label class="chk"><input type="checkbox" name="x${d}" ${S.hours[d] ? '' : 'checked'}> Closed</label></div>`).join('')}</div>
+      <div class="card-box"><h3>Delivery</h3><div class="form"><label>Delivery fee (£)<input type="number" step="0.01" name="deliveryFee" value="${S.deliveryFee}"></label><label>Free delivery over (£)<input type="number" step="0.01" name="freeDeliveryOver" value="${S.freeDeliveryOver}"></label><label>Minimum delivery order (£)<input type="number" step="0.01" name="minDelivery" value="${S.minDelivery}"></label><label>Postcode districts (comma separated)<input name="deliveryAreas" value="${esc(S.deliveryAreas.join(', '))}"></label></div></div>
+      <button class="btn">Save settings</button></form>
+      <div class="card-box" style="margin-top:1.2rem"><h3>Catalogue data</h3><p class="hint" style="margin-bottom:1rem">Export your catalogue as JSON to back it up, move it to another device, or import it into a future online store backend.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap"><button class="ab" id="exp">⬇ Download JSON</button><button class="ab" id="cpy">⧉ Copy JSON</button><button class="ab" id="imp">⬆ Import JSON</button><button class="ab del" id="rst">Reset to default catalogue</button></div></div>`;
+    $('#sf').onsubmit = e => {
+      e.preventDefault(); const d = Object.fromEntries(new FormData(e.target));
+      ['announcement', 'phone', 'whatsapp', 'instagram', 'adminPin'].forEach(k => S[k] = d[k].trim());
+      ['deliveryFee', 'freeDeliveryOver', 'minDelivery'].forEach(k => S[k] = +d[k] || 0);
+      S.deliveryAreas = d.deliveryAreas.split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+      S.hours = {}; for (let i = 0; i < 7; i++) if (!d['x' + i] && d['o' + i] && d['c' + i]) S.hours[i] = [d['o' + i], d['c' + i]];
+      save(); MM.toast('Settings saved');
+    };
+    const json = () => JSON.stringify(db(), null, 2);
+    $('#exp').onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([json()], { type: 'application/json' })); a.download = 'masala-mart-catalogue.json'; a.click(); };
+    $('#cpy').onclick = () => navigator.clipboard.writeText(json()).then(() => MM.toast('Copied to clipboard'), () => MM.toast('Copy blocked by browser', 'warn'));
+    $('#imp').onclick = () => $('#importFile').click();
+    $('#rst').onclick = () => confirmBox('Reset the catalogue to defaults? Your edits will be lost.', () => { Store.reset(); MM.toast('Catalogue reset'); shell(); });
+  }
+  $('#importFile').onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(t => { try { const d = JSON.parse(t); if (!Array.isArray(d.products) || !Array.isArray(d.categories)) throw 0; d.version = MM_DEFAULTS.version; Store.save(d); MM.toast('Catalogue imported'); shell(); } catch (x) { MM.toast('Invalid catalogue file', 'warn'); } }); e.target.value = ''; };
+
+  function confirmBox(msg, ok) {
+    const m = $('#pm'); m.querySelector('.modal-card').innerHTML = `<div class="mbody" style="text-align:center;max-width:420px;margin:auto"><h2>Are you sure?</h2><p class="muted">${esc(msg)}</p><div style="display:flex;gap:.6rem;justify-content:center;margin-top:1.4rem"><button class="btn" id="cy">Yes, continue</button><button class="btn ghost" id="cn">Cancel</button></div></div>`;
+    m.classList.add('show'); $('#cy').onclick = () => { m.classList.remove('show'); ok(); }; $('#cn').onclick = () => m.classList.remove('show');
+  }
+  $('#pm').addEventListener('click', e => { if (e.target.id === 'pm') e.currentTarget.classList.remove('show'); });
+  authed() ? shell() : login();
+});
+</script>
+</body>
+</html>

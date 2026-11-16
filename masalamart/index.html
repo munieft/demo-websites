@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Masala Mart — Indian Grocery Store in Barnet | Fresh Produce, Spices & Mithai</title>
+<meta name="description" content="Masala Mart, 189–191 High Street, Barnet EN5 5SU. Your one stop Indian grocery store — fresh vegetables, spices, atta, dal, namkeen, mithai, frozen and pooja essentials. Click & Collect and local delivery.">
+<meta name="theme-color" content="#0f6b31">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..700&family=Outfit:wght@300..700&family=Yatra+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="index">
+<div id="site-header"></div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <canvas id="petals"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="namaste reveal"><b>स्वागत है</b> Welcome to Barnet's Indian grocery</span>
+      <h1 class="reveal">The taste of <em>home<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M3 15 Q100 0 197 12"/></svg></em>, right on the High Street.</h1>
+      <p class="lead reveal">From hand-picked methi and fresh toover dana to stone-ground atta, mithai and everything for your puja — Masala Mart is your one stop Indian grocery store.</p>
+      <div class="hero-cta reveal">
+        <a href="shop.html" class="btn">Shop the aisles <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="shop.html#offers" class="btn ghost">This week's offers</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div><b>4.3 <span class="stars">★★★★☆</span></b><span>73 Google reviews</span></div>
+        <div><b data-pcount>80+</b><span>Products online</span></div>
+        <div><b>7 days</b><span data-open>Open daily</span></div>
+      </div>
+    </div>
+    <div class="arch reveal">
+      <svg class="diya" viewBox="0 0 80 80"><path class="flame" d="M40 8 C48 22 48 30 40 36 C32 30 32 22 40 8Z" fill="#ffb627"/><path class="flame" d="M40 18 C44 26 44 30 40 34 C36 30 36 26 40 18Z" fill="#fff3c4"/><path d="M8 42 Q40 40 72 42 Q66 66 40 68 Q14 66 8 42Z" fill="#c2410c"/><path d="M8 42 Q40 50 72 42" stroke="#ffb627" stroke-width="3" fill="none"/><circle cx="26" cy="54" r="2.5" fill="#ffd25e"/><circle cx="40" cy="57" r="2.5" fill="#ffd25e"/><circle cx="54" cy="54" r="2.5" fill="#ffd25e"/></svg>
+      <div class="arch-frame"><video src="assets/video/aisle.mp4" poster="assets/video/aisle.jpg" autoplay muted loop playsinline></video><div class="arch-cap">Step inside Masala Mart</div></div>
+      <div class="float f1"><img src="assets/img/products/toover-dana.jpg" alt=""><div><b>Toover Dana</b><small>Just arrived · £2.49</small></div></div>
+      <div class="float f2"><span class="tag">7 for £1</span><div><b>Yippee! Noodles</b><small>Magic Masala</small></div></div>
+      <div class="float f3"><img src="assets/img/products/veg-puff.jpg" alt=""><div><b>Veg Puff BOGOF</b><small>Hot counter · £2.50</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Shop by aisle</span><div class="orn"><i></i></div><h2>Everything your <em>kitchen</em> is asking for</h2><p>Thirteen aisles of Indian staples, fresh produce and festive essentials — stocked daily on Barnet High Street.</p></div>
+    <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section class="sec band">
+  <div class="wrap">
+    <div class="head-row"><div class="sec-head reveal"><span class="eyebrow">Bachat hi bachat</span><h2 class="h2">This week's offers</h2><p>Multi-buys apply automatically in your basket. MM Card members unlock even lower prices.</p></div>
+      <div class="rail-nav"><button data-rail="-1" aria-label="Previous">←</button><button data-rail="1" aria-label="Next">→</button></div></div>
+    <div class="rail" id="offers"></div>
+  </div>
+</section>
+
+<!-- SEASON -->
+<section class="sec">
+  <div class="wrap season">
+    <div class="season-pics reveal">
+      <img src="assets/img/products/saag.jpg" alt="Fresh saag leaves"><img src="assets/img/products/mooli.jpg" alt="Fresh mooli">
+      <img src="assets/img/products/green-garlic.jpg" alt="Green garlic"><img src="assets/img/products/toover-dana.jpg" alt="Toover dana">
+      <div class="stamp">Winter<br>Arrivals</div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Shiyalo aavyo — winter is here</span>
+      <h2 class="h2">Undhiyu season <em>starts here</em></h2>
+      <p class="muted" style="margin-top:.8rem">Green garlic, toover dana, Surti papdi, saag and mooli have landed. Build the perfect winter basket for undhiyu, sarson ka saag and mooli parathas in one tap.</p>
+      <div class="basket-list" id="basket"></div>
+      <button class="btn green" id="addBasket">Add winter basket <span id="basketTotal"></span></button>
+    </div>
+  </div>
+</section>
+
+<!-- BESTSELLERS -->
+<section class="sec" style="background:var(--cream);padding-top:5rem">
+  <div class="wrap">
+    <div class="head-row"><div class="sec-head reveal"><span class="eyebrow">Ghar jaisa</span><h2>Store <em>favourites</em></h2><p>What Barnet keeps coming back for.</p></div><a href="shop.html" class="btn ghost">View all products →</a></div>
+    <div class="grid" id="favs"></div>
+  </div>
+</section>
+
+<!-- INSIDE -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Andar aaiye</span><div class="orn"><i></i></div><h2>Step inside <em>Masala Mart</em></h2><p>Bright aisles, crates of fresh sabzi and Ganpati Bappa welcoming you at the door.</p></div>
+    <div class="mosaic">
+      <figure class="t2 reveal"><img src="assets/img/store/ganesh-murti.jpg" alt="Ganesh murti at the entrance" loading="lazy"><figcaption>Ganpati Bappa at the door</figcaption></figure>
+      <figure class="w2 reveal"><img src="assets/img/store/fresh-produce.jpg" alt="Fresh produce wall" loading="lazy"><figcaption>Fresh sabzi wall</figcaption></figure>
+      <figure class="t2 reveal"><img src="assets/img/store/veg-crates.jpg" alt="Vegetable crates" loading="lazy"><figcaption>Daily fresh crates</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/store/spice-aisle.jpg" alt="Spice aisle" loading="lazy"><figcaption>Spice aisle</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/store/aisle-staples.jpg" alt="Staples aisle" loading="lazy"><figcaption>Pantry staples</figcaption></figure>
+      <figure class="w2 reveal"><img src="assets/img/store/interior-ganesh.jpg" alt="Store interior" loading="lazy"><figcaption>Our Barnet store</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/store/frozen.jpg" alt="Frozen parathas" loading="lazy"><figcaption>Frozen favourites</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/store/storefront.jpg" alt="Masala Mart storefront on Barnet High Street" loading="lazy"><figcaption>189–191 High Street</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- FESTIVALS -->
+<section class="sec" style="background:linear-gradient(#fff8ec,#fff)">
+  <div class="wrap">
+    <div class="head-row"><div class="sec-head reveal"><span class="eyebrow">Har tyohaar, saath saath</span><h2>Every festival, <em>celebrated together</em></h2><p>From Ganesh Chaturthi to Navratri, Diwali and Nutan Varsh — we stock the essentials and share the joy.</p></div><a href="https://www.instagram.com/masalamartuk/" target="_blank" rel="noopener" class="btn ghost">Follow @masalamartuk</a></div>
+    <div class="posters" id="posters"></div>
+  </div>
+</section>
+
+<!-- MM CARD -->
+<section class="sec">
+  <div class="wrap mmcard-sec">
+    <div class="mmcard reveal"><h3><img src="assets/img/logo.jpg" alt="">MM Card</h3><div class="chip"></div><div class="num">MM •••• •••• 2026</div><div class="nm">Masala Mart Member</div></div>
+    <div class="reveal">
+      <span class="eyebrow">Loyalty that tastes better</span>
+      <h2 class="h2">Save more with the <em>MM Card</em></h2>
+      <p class="muted" style="margin:.8rem 0">Pick up your free MM Card at the till and unlock exclusive member prices every week — like Top-Op Coarse Semolina for £2.49 and Maggi sauces for just £1.99.</p>
+      <ul class="ticks"><li>Exclusive weekly member prices</li><li>Early access to festive combos & mithai boxes</li><li>Works in store and on Click & Collect orders</li></ul>
+      <a href="shop.html#member" class="btn gold">See MM Card prices</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATERING -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="cater reveal"><img src="assets/img/promo/05.jpg" alt="Festive vegetarian food">
+      <div class="cater-in"><span class="eyebrow">Suman's Pure Vegetarian Caterers</span><h2>Weddings, receptions & parties — catered with love.</h2>
+        <p>UK's Asian wedding caterers, operating from our Barnet home. Pure vegetarian menus for every occasion, catering nationally.</p>
+        <div class="chips"><span>Weddings</span><span>Receptions</span><span>Parties</span><span>Corporate</span><span>Nationwide</span></div>
+        <a href="store.html#catering" class="btn gold">Plan your event menu</a></div></div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec" style="padding-top:0" id="visit">
+  <div class="wrap visit">
+    <div class="visit-card reveal">
+      <span class="eyebrow">Padharo</span><h3>Visit us in Barnet</h3>
+      <p class="muted">189–191 High Street, Hadley, Barnet EN5 5SU</p>
+      <div class="hours" data-hours></div>
+      <div style="display:flex;gap:.7rem;flex-wrap:wrap"><a class="btn green" href="https://www.google.com/maps/dir/?api=1&destination=Masala+Mart+189+High+St+Barnet+EN5+5SU" target="_blank" rel="noopener">Get directions</a><a class="btn ghost" href="https://wa.me/447512345114" target="_blank" rel="noopener">WhatsApp 07512 345114</a></div>
+    </div>
+    <div class="map reveal"><iframe title="Masala Mart on Google Maps" loading="lazy" src="https://maps.google.com/maps?q=51.6580693,-0.201232&z=16&output=embed"></iframe></div>
+  </div>
+</section>
+</main>
+
+<div class="lightbox" id="lb"><button class="x" aria-label="Close">×</button><img alt=""></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const { Store, Cart, $, $$, card, img, esc, money, pence, petals } = MM;
+  petals(document.getElementById('petals'));
+  const P = Store.products;
+  $('[data-pcount]').textContent = P.length + '+';
+  // categories
+  $('#cats').innerHTML = Store.categories.map(c => `<a class="cat reveal" style="--h:${c.hue}" href="shop.html#c-${c.id}"><div class="cat-ico">${c.icon}</div><b>${esc(c.name)}</b><small>${P.filter(p => p.cat === c.id).length} items</small></a>`).join('');
+  // offers
+  $('#offers').innerHTML = P.filter(p => p.offer || p.mm || p.was || /only|combo/i.test(p.badge || '')).map(card).join('');
+  $$('[data-rail]').forEach(b => b.onclick = () => $('#offers').scrollBy({ left: b.dataset.rail * 560, behavior: 'smooth' }));
+  // winter basket
+  const ids = ['p001', 'p002', 'p010', 'p003', 'p004', 'p090'].map(id => Store.product(id)).filter(Boolean);
+  $('#basket').innerHTML = ids.map(p => `<div class="bl"><img src="${img(p)}" alt=""><div><b>${esc(p.name)}</b><small>${esc(p.unit)}</small></div><strong>${pence(p.price)}</strong></div>`).join('');
+  $('#basketTotal').textContent = '· ' + money(ids.reduce((a, p) => a + p.price, 0));
+  $('#addBasket').onclick = () => { ids.forEach(p => Cart.add(p.id)); MM.toast('Winter basket added'); MM.openDrawer(); };
+  // favourites
+  $('#favs').innerHTML = P.filter(p => p.featured || /bestseller/i.test(p.badge || '')).slice(0, 8).map(card).join('');
+  // posters
+  const posters = [['03', 'Nutan Varsh'], ['04', 'Diwali'], ['14', 'Diwali Offer'], ['06', 'Navratri'], ['05', 'Dussehra'], ['09', 'Ganesh Chaturthi'], ['02', 'Ganesh Chaturthi'], ['10', 'Fresh Arrivals'], ['11', 'Fresh Arrivals'], ['19', 'Paryushan']];
+  $('#posters').innerHTML = posters.map(([f, t]) => `<figure class="poster reveal" data-lb="assets/img/promo/${f}.jpg"><img src="assets/img/promo/${f}.jpg" alt="${t} at Masala Mart"><span>${t}</span></figure>`).join('');
+  // lightbox
+  const lb = $('#lb');
+  document.addEventListener('click', e => { const f = e.target.closest('[data-lb],.mosaic figure'); if (f) { lb.querySelector('img').src = f.dataset.lb || f.querySelector('img').src; lb.classList.add('show'); } });
+  lb.onclick = e => { if (e.target.tagName !== 'IMG') lb.classList.remove('show'); };
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Basket & Checkout — Masala Mart Barnet</title>
+<meta name="theme-color" content="#0f6b31">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..700&family=Outfit:wght@300..700&family=Yatra+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="cart">
+<div id="site-header"></div>
+<section class="phero"><div class="wrap"><div class="crumb"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / Basket</div><h1 class="h2">Your basket</h1><p>Review your items, choose Click & Collect or local delivery, and we'll have it packed fresh for you.</p></div></section>
+
+<main class="wrap" id="app"></main>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const { Store, Cart, $, $$, esc, money, pence, img } = MM;
+  const S = Store.settings;
+  let mode = 'collect', slot = null, slotDay = 0, placed = false;
+
+  function days() {
+    const out = [], now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
+    for (let i = 0; i < 4; i++) { const d = new Date(now); d.setDate(now.getDate() + i); const h = S.hours[d.getDay()]; if (!h) continue;
+      const [oh] = h[0].split(':').map(Number), [ch] = h[1].split(':').map(Number); const sl = [];
+      for (let t = oh + 1; t < ch; t += 2) { if (i === 0 && t <= now.getHours() + 1) continue; sl.push(`${String(t).padStart(2, '0')}:00–${String(Math.min(t + 2, ch)).padStart(2, '0')}:00`); }
+      if (sl.length) out.push({ label: i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }), date: d.toDateString(), sl }); }
+    return out;
+  }
+  function fees(sub) { return mode === 'deliver' ? (sub >= S.freeDeliveryOver ? 0 : S.deliveryFee) : 0; }
+
+  function render() {
+    if (placed) return;
+    const t = Cart.totals();
+    if (!t.lines.length) { $('#app').innerHTML = `<div class="panel done" style="margin:3rem 0"><div class="empty-ico" style="font-size:4rem">🛍️</div><h2>Your basket is empty</h2><p class="muted" style="margin:.6rem 0 1.6rem">Fresh methi, hot veg puffs and festive mithai are waiting for you.</p><a class="btn" href="shop.html">Browse the aisles</a></div>`; return; }
+    const D = days(); if (!slot && D[0]) { slot = D[0].sl[0]; slotDay = 0; }
+    const fee = fees(t.sub), total = t.sub + fee;
+    const form = $('#co') ? Object.fromEntries(new FormData($('#co'))) : {};
+    $('#app').innerHTML = `<div class="checkout">
+    <div>
+      <div class="panel"><h3><i>1</i> Items <small class="muted" style="font-family:var(--f-b);font-size:.9rem;font-weight:400">(${t.count})</small></h3>
+        ${t.lines.map(l => `<div class="cl-row"><img src="${img(l.p)}" alt=""><div><b>${esc(l.p.name)}</b><small>${esc(l.p.unit || '')} · ${pence(l.unit)} each${l.p.offer ? ` · <span style="color:var(--red);font-weight:600">${esc(l.p.offer.label)}</span>` : ''}</small><br><button class="rm" data-rm="${l.p.id}">Remove</button></div>
+        <div class="qty" data-id="${l.p.id}"><button data-dec>−</button><span>${l.qty}</span><button data-inc>+</button></div><div class="lt">${money(l.total)}${l.full > l.total ? `<s>${money(l.full)}</s>` : ''}</div></div>`).join('')}
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:.6rem"><a href="shop.html" class="link">← Keep shopping</a><button class="link" id="clear" style="color:var(--muted)">Empty basket</button></div>
+      </div>
+      <form class="panel" id="co" novalidate><h3><i>2</i> Collection or delivery</h3>
+        <div class="seg"><label><input type="radio" name="mode" value="collect" ${mode === 'collect' ? 'checked' : ''}><b>🏪 Click & Collect</b><small>Free · ready in 2 hours from 189–191 High St</small></label>
+          <label><input type="radio" name="mode" value="deliver" ${mode === 'deliver' ? 'checked' : ''}><b>🛵 Local delivery</b><small>${money(S.deliveryFee)} · free over ${money(S.freeDeliveryOver)} · min ${money(S.minDelivery)}</small></label></div>
+        <p style="font-weight:600;font-size:.88rem;margin-bottom:.5rem">Choose a ${mode === 'collect' ? 'collection' : 'delivery'} slot</p>
+        <div class="slots" style="margin-bottom:.6rem">${D.map((d, i) => `<button type="button" data-day="${i}" class="${i === slotDay ? 'on' : ''}">${d.label}</button>`).join('')}</div>
+        <div class="slots" style="margin-bottom:1.4rem">${(D[slotDay]?.sl || []).map(s => `<button type="button" data-slot="${s}" class="${s === slot ? 'on' : ''}">${s}</button>`).join('')}</div>
+        <h3><i>3</i> Your details</h3>
+        <div class="form">
+          <label>Full name<input name="name" required autocomplete="name" value="${esc(form.name || '')}"></label>
+          <label>Mobile number<input name="phone" required type="tel" autocomplete="tel" value="${esc(form.phone || '')}"></label>
+          <label class="full">Email (for your receipt)<input name="email" type="email" autocomplete="email" value="${esc(form.email || '')}"></label>
+          ${mode === 'deliver' ? `<label class="full">Delivery address<input name="address" required autocomplete="street-address" value="${esc(form.address || '')}"></label>
+          <label>Postcode<input name="postcode" required autocomplete="postal-code" value="${esc(form.postcode || '')}" placeholder="e.g. EN5 5SU"></label><div></div>` : ''}
+          <label class="full">Notes for our team<textarea name="notes" rows="2" placeholder="E.g. extra ripe bananas, small bunches of methi…">${esc(form.notes || '')}</textarea></label>
+        </div><div class="err" id="err"></div>
+      </form>
+    </div>
+    <aside class="summary"><div class="panel"><h3>Order summary</h3>
+      <label class="member"><input type="checkbox" id="mem" ${Cart.member() ? 'checked' : ''}><div><b>I have an MM Card</b><small>Apply member prices · card is checked at collection</small></div></label>
+      <div class="sum-row"><span>Items (${t.count})</span><span>${money(t.sub + t.saved)}</span></div>
+      ${t.saved > 0 ? `<div class="sum-row save"><span>Offers & MM savings</span><span>−${money(t.saved)}</span></div>` : ''}
+      <div class="sum-row"><span>${mode === 'deliver' ? 'Delivery' : 'Click & Collect'}</span><span>${fee ? money(fee) : 'Free'}</span></div>
+      ${mode === 'deliver' && t.sub < S.freeDeliveryOver ? `<div class="note">Add ${money(S.freeDeliveryOver - t.sub)} more for free delivery.</div>` : ''}
+      <div class="sum-row total"><span>Total</span><span>${money(total)}</span></div>
+      <button class="btn btn-full" id="place" style="margin-top:1.2rem">Place order · ${money(total)}</button>
+      <p class="note">Pay in store on collection or on delivery by card or cash. Your order is sent to our team on WhatsApp for confirmation.</p>
+    </div></aside></div>`;
+
+    $$('[name=mode]').forEach(r => r.onchange = () => { mode = r.value; render(); });
+    $$('[data-day]').forEach(b => b.onclick = () => { slotDay = +b.dataset.day; slot = D[slotDay].sl[0]; render(); });
+    $$('[data-slot]').forEach(b => b.onclick = () => { slot = b.dataset.slot; $$('[data-slot]').forEach(x => x.classList.toggle('on', x === b)); });
+    $$('[data-rm]').forEach(b => b.onclick = () => Cart.set(b.dataset.rm, 0));
+    $('#clear').onclick = () => Cart.clear();
+    $('#mem').onchange = e => Cart.setMember(e.target.checked);
+    $('#place').onclick = () => place(D);
+  }
+
+  function place(D) {
+    const f = $('#co'), d = Object.fromEntries(new FormData(f)), err = $('#err'), t = Cart.totals();
+    if (!d.name || !d.phone || !/^[+\d\s()-]{10,}$/.test(d.phone)) { err.textContent = 'Please add your name and a valid mobile number.'; f.scrollIntoView({ behavior: 'smooth' }); return; }
+    if (mode === 'deliver') {
+      const pc = (d.postcode || '').toUpperCase().replace(/\s+/g, ''), out = pc.slice(0, pc.length - 3);
+      if (!d.address || !pc) { err.textContent = 'Please add your delivery address and postcode.'; return; }
+      if (!S.deliveryAreas.includes(out)) { err.textContent = `Sorry, we currently deliver to ${S.deliveryAreas.join(', ')}. Click & Collect is always available.`; return; }
+      if (t.sub < S.minDelivery) { err.textContent = `Minimum order for delivery is ${money(S.minDelivery)}.`; return; }
+    }
+    const fee = fees(t.sub), id = 'MM' + Date.now().toString().slice(-6);
+    const order = { id, at: new Date().toISOString(), status: 'New', mode, slot: `${D[slotDay].label} ${slot}`, member: Cart.member(), customer: d,
+      items: t.lines.map(l => ({ id: l.p.id, name: l.p.name, unit: l.p.unit, qty: l.qty, total: l.total })), sub: t.sub, saved: t.saved, fee, total: Math.round((t.sub + fee) * 100) / 100 };
+    const orders = Store.orders(); orders.unshift(order); Store.saveOrders(orders);
+    const msg = `🛒 *New Masala Mart order ${id}*\n${mode === 'collect' ? 'Click & Collect' : 'Delivery'} · ${order.slot}\n\n` + order.items.map(i => `• ${i.qty} × ${i.name} (${i.unit}) — ${money(i.total)}`).join('\n') +
+      `\n\nSubtotal: ${money(order.sub)}${order.saved ? `\nSaved: ${money(order.saved)}` : ''}${fee ? `\nDelivery: ${money(fee)}` : ''}\n*Total: ${money(order.total)}*${order.member ? '\nMM Card member' : ''}\n\n${d.name} · ${d.phone}${mode === 'deliver' ? `\n${d.address}, ${d.postcode}` : ''}${d.notes ? `\nNotes: ${d.notes}` : ''}`;
+    const wa = `https://wa.me/${S.whatsapp}?text=${encodeURIComponent(msg)}`;
+    placed = true; Cart.clear();
+    $('#app').innerHTML = `<div class="panel done" style="margin:3rem auto;max-width:720px"><div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
+      <span class="eyebrow">Dhanyavaad, ${esc(d.name.split(' ')[0])}!</span><h2>Order ${id} received</h2>
+      <p class="muted">${mode === 'collect' ? `Collect from 189–191 High Street, Barnet EN5 5SU · ${esc(order.slot)}` : `Delivering to ${esc(d.postcode.toUpperCase())} · ${esc(order.slot)}`}</p>
+      <div class="receipt">${order.items.map(i => `<div><span>${i.qty} × ${esc(i.name)}</span><b>${money(i.total)}</b></div>`).join('')}<hr style="border:0;border-top:1px dashed var(--gold);margin:.6rem 0">${order.saved ? `<div><span>You saved</span><b style="color:var(--green)">${money(order.saved)}</b></div>` : ''}${fee ? `<div><span>Delivery</span><b>${money(fee)}</b></div>` : ''}<div style="font-size:1.1rem"><span>Total to pay</span><b>${money(order.total)}</b></div></div>
+      <p style="margin-bottom:1.2rem">Tap below to send your order to our team on WhatsApp — we'll confirm it straight away.</p>
+      <a class="btn green" href="${wa}" target="_blank" rel="noopener">Send order on WhatsApp</a>
+      <p class="note">Or call us on 07512 345114 and quote ${id}.</p><a class="link" href="shop.html" style="display:inline-block;margin-top:1rem">Continue shopping</a></div>`;
+    scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  addEventListener('mm:cart', render);
+  render();
+});
+</script>
+</body>
+</html>
