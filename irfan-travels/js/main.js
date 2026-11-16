@@ -7,9 +7,13 @@
   var PHONE="447944157746";
 
   /* Preloader */
-  function hidePre(){var p=$(".preloader");if(p){p.classList.add("done");setTimeout(function(){p.remove()},900)}document.body.classList.add("loaded")}
-  window.addEventListener("load",function(){setTimeout(hidePre,reduce?0:1300)});
-  setTimeout(hidePre,4000);
+  var t0pl=Date.now(),seen=false;
+  try{seen=sessionStorage.getItem("it_intro")==="1"}catch(e){}
+  var MIN=reduce?0:(seen?900:2900);
+  function hidePre(){var p=$(".preloader");if(!p||p.classList.contains("done"))return;p.classList.add("done");document.body.classList.remove("loading");document.body.classList.add("loaded");try{sessionStorage.setItem("it_intro","1")}catch(e){}setTimeout(function(){p.remove()},1300)}
+  if(seen){var pl=$(".preloader");if(pl)pl.classList.add("quick")}
+  window.addEventListener("load",function(){setTimeout(hidePre,Math.max(0,MIN-(Date.now()-t0pl)))});
+  setTimeout(hidePre,6000);
 
   /* Year */
   $$("[data-year]").forEach(function(e){e.textContent=new Date().getFullYear()});
@@ -177,7 +181,8 @@
       {n:"Makkah",p:v(21.4,39.8),c:"#f3d48a"},{n:"Madinah",p:v(24.5,39.6),c:"#f3d48a",nl:1},
       {n:"Colombo",p:v(6.9,79.9),c:"#45a6ff"},{n:"Malé",p:v(4.2,73.5),c:"#7fe0ff"},
       {n:"Dubai",p:v(25.2,55.3),c:"#9cc9ff"},{n:"Istanbul",p:v(41,29),c:"#9cc9ff"},
-      {n:"Kuala Lumpur",p:v(3.1,101.7),c:"#9cc9ff"},{n:"Paris",p:v(48.9,2.35),c:"#9cc9ff",nl:1}
+      {n:"Kuala Lumpur",p:v(3.1,101.7),c:"#9cc9ff"},{n:"Paris",p:v(48.9,2.35),c:"#9cc9ff",nl:1},
+      {n:"Lahore",p:v(31.5,74.3),c:"#7ee0a8"},{n:"Islamabad",p:v(33.7,73.1),c:"#7ee0a8",nl:1},{n:"Delhi",p:v(28.6,77.2),c:"#ffb36b"}
     ];
     function slerp(a,b,t){var d=Math.acos(Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2]))),s=Math.sin(d);if(s<1e-6)return a;var k1=Math.sin((1-t)*d)/s,k2=Math.sin(t*d)/s;return [a[0]*k1+b[0]*k2,a[1]*k1+b[1]*k2,a[2]*k1+b[2]*k2]}
     var rot=-45*D,tilt=-18*D,drag=null,off=0,hover=-1;
