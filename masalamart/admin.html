@@ -55,7 +55,10 @@ body{background:#f6f1e7}
 .order ul{margin:.7rem 0 0 1.1rem;font-size:.9rem}
 .order select{border:1px solid var(--line);border-radius:10px;padding:.4rem .6rem}
 .hint{font-size:.8rem;color:var(--muted)}
-@media(max-width:900px){.adm{grid-template-columns:1fr}.aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap}.aside .brand,.aside .sp{display:none}.stats{grid-template-columns:1fr 1fr}}
+.adm>*{min-width:0}
+@media(max-width:900px){.adm{grid-template-columns:1fr}.aside{position:sticky;top:0;z-index:20;height:auto;flex-direction:row;flex-wrap:nowrap;overflow-x:auto;padding:.6rem;gap:.3rem;scrollbar-width:none}.aside::-webkit-scrollbar{display:none}.aside button,.aside a.tab{white-space:nowrap;padding:.55rem .8rem;font-size:.88rem;flex-shrink:0}.aside .brand,.aside .sp{display:none}.stats{grid-template-columns:1fr 1fr}.main{padding:1.2rem 1rem}.top h1{font-size:1.6rem}.top>div{width:100%}.top .field{flex:1;min-width:0}.top .field input,.top .field select{width:100%}.top .btn{width:100%;justify-content:center}
+.tbl.prod thead{display:none}.tbl.prod,.tbl.prod tbody,.tbl.prod tr{display:block}.tbl.prod tr{display:grid;grid-template-columns:56px 1fr 1fr 1fr;gap:.4rem .6rem;padding:.9rem;border-bottom:1px solid #f0e6d2;align-items:center}.tbl.prod tr:first-child{display:none}.tbl.prod td{border:0;padding:0;font-size:.85rem}.tbl.prod td:nth-child(2){grid-column:2/-1}.tbl.prod td:nth-child(3){display:none}.tbl.prod td[data-l]::before{content:attr(data-l);display:block;font-size:.68rem;color:var(--muted);text-transform:uppercase}.tbl.prod td:nth-child(4){grid-column:1/3}.tbl.prod input.inl{width:100%}.tbl.prod td:last-child{grid-column:1/-1;display:flex;gap:.4rem}.tbl.prod td:last-child .ab{flex:1;padding:.6rem}
+.hrs{grid-template-columns:1fr 1fr;}.hrs b{grid-column:1/-1}.order header>div:last-child{flex-wrap:wrap}.drop{grid-template-columns:80px 1fr}.drop img{width:80px;height:80px}.mbody{padding:1.3rem}}
 </style>
 </head>
 <body>
@@ -105,10 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let list = db().products.filter(p => (pc === 'all' || p.cat === pc) && (!pq || p.name.toLowerCase().includes(pq.toLowerCase())));
     $('#view').innerHTML = `<div class="top"><h1>Products <small class="muted" style="font-size:1rem;font-family:var(--f-b)">${list.length}</small></h1>
       <div style="display:flex;gap:.6rem;flex-wrap:wrap"><div class="field"><input id="pq" placeholder="Search…" value="${esc(pq)}"></div><div class="field"><select id="pc"><option value="all">All aisles</option>${C.map(c => `<option value="${c.id}" ${pc === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></div><button class="btn" data-new>+ Add product</button></div></div>
-      <div class="scroll"><table class="tbl"><tr><th>Image</th><th>Name</th><th>Aisle</th><th>Price £</th><th>MM £</th><th>Stock</th><th>Live</th><th></th></tr>
+      <div class="scroll"><table class="tbl prod"><tr><th>Image</th><th>Name</th><th>Aisle</th><th>Price £</th><th>MM £</th><th>Stock</th><th>Live</th><th></th></tr>
       ${list.map(p => `<tr><td><img src="${img(p)}" alt=""></td><td><b>${esc(p.name)}</b><div class="hint">${esc(p.unit || '')}${p.badge ? ' · ' + esc(p.badge) : ''}${p.offer ? ' · ' + esc(p.offer.label) : ''}</div></td><td>${esc(Store.cat(p.cat).name)}</td>
-      <td><input class="inl" type="number" step="0.01" data-f="price" data-id="${p.id}" value="${p.price}"></td><td><input class="inl" type="number" step="0.01" data-f="mm" data-id="${p.id}" value="${p.mm ?? ''}"></td><td><input class="inl" type="number" data-f="stock" data-id="${p.id}" value="${p.stock ?? 0}"></td>
-      <td><input type="checkbox" data-vis="${p.id}" ${p.hidden ? '' : 'checked'} style="width:18px;height:18px;accent-color:var(--green)"></td>
+      <td data-l="Price £"><input class="inl" type="number" step="0.01" data-f="price" data-id="${p.id}" value="${p.price}"></td><td data-l="MM £"><input class="inl" type="number" step="0.01" data-f="mm" data-id="${p.id}" value="${p.mm ?? ''}"></td><td data-l="Stock"><input class="inl" type="number" data-f="stock" data-id="${p.id}" value="${p.stock ?? 0}"></td>
+      <td data-l="Live"><input type="checkbox" data-vis="${p.id}" ${p.hidden ? '' : 'checked'} style="width:18px;height:18px;accent-color:var(--green)"></td>
       <td style="white-space:nowrap"><button class="ab" data-edit="${p.id}">Edit</button> <button class="ab del" data-del="${p.id}">Delete</button></td></tr>`).join('')}</table></div>
       <p class="hint" style="margin-top:.8rem">Tip: edit price, MM price and stock inline — changes save instantly and show on the shop.</p>`;
     $('#pq').oninput = e => { pq = e.target.value; clearTimeout(window._t); window._t = setTimeout(() => { products(); const i = $('#pq'); i.focus(); i.setSelectionRange(99, 99); }, 250); };

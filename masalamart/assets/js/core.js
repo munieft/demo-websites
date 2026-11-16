@@ -107,7 +107,7 @@
     <div class="ticker"><div class="ticker-track"><span>${esc(s.announcement)}</span><span>${esc(s.announcement)}</span></div></div>
     <header class="hdr"><div class="wrap hdr-in">
       <a href="index.html" class="brand"><img src="assets/img/logo.jpg" alt="Masala Mart logo"><span><b>Masala Mart</b><small>Barnet · Est. on the High Street</small></span></a>
-      <nav class="nav">${NAV.map(([h, t]) => `<a href="${h}" class="${(page === h.split('.')[0] && !h.includes('#')) ? 'on' : ''}">${t}</a>`).join('')}</nav>
+      <nav class="nav"><button class="nav-x" type="button" aria-label="Close menu">×</button>${NAV.map(([h, t]) => `<a href="${h}" class="${(page === h.split('.')[0] && !h.includes('#')) ? 'on' : ''}">${t}</a>`).join('')}<form class="nav-search" role="search"><input name="q" placeholder="Search products…" aria-label="Search products"></form><div class="nav-info"><span data-open></span><a href="tel:+${esc(s.whatsapp)}">📞 ${esc(s.phone)}</a><span>📍 ${esc(s.address)}</span></div></nav>
       <form class="hsearch" role="search"><input name="q" placeholder="Search atta, jeera, paneer…" aria-label="Search products"><button aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button></form>
       <span class="open-pill" data-open></span>
       <button class="cart-btn" data-cart aria-label="Open basket"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg><i data-count>0</i></button>
@@ -127,6 +127,8 @@
     </div><div class="wrap ftr-base"><span>© ${new Date().getFullYear()} Masala Mart, Barnet. Pure vegetarian • Shop local.</span><span>शुभ लाभ · Made with love on the High Street</span></div></footer>`;
 
     // events
+    $('.nav-x')?.addEventListener('click', () => document.body.classList.remove('nav-open'));
+    $('.nav-search')?.addEventListener('submit', e => { e.preventDefault(); const q = e.target.q.value.trim(); document.body.classList.remove('nav-open'); location.href = 'shop.html' + (q ? '#q-' + encodeURIComponent(q) : ''); });
     $('.hsearch')?.addEventListener('submit', e => { e.preventDefault(); const q = e.target.q.value.trim(); location.href = 'shop.html' + (q ? '#q-' + encodeURIComponent(q) : ''); });
     $('.burger')?.addEventListener('click', () => document.body.classList.toggle('nav-open'));
     $$('.nav a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
@@ -149,7 +151,7 @@
 
   function renderCount() { const n = Cart.totals().count; $$('[data-count]').forEach(el => { el.textContent = n; el.classList.toggle('has', n > 0); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }); }
   function openDrawer() { renderDrawer(); document.body.classList.add('drawer-open'); }
-  function closeDrawer() { document.body.classList.remove('drawer-open'); }
+  function closeDrawer() { document.body.classList.remove('drawer-open', 'nav-open'); }
   function renderDrawer() {
     const b = $('.dr-body'), f = $('.dr-foot'); if (!b) return; const t = Cart.totals();
     if (!t.lines.length) { b.innerHTML = `<div class="empty"><div class="empty-ico">🛍️</div><p>Your basket is empty.</p><a class="btn" href="shop.html">Start shopping</a></div>`; f.innerHTML = ''; return; }
